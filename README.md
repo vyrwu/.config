@@ -1,21 +1,11 @@
 # .config
 Collection of all my MacOS/Linux configuration files.
 
-## Requirements
+## Installation
+This should ideally install and configure all tools required
+for development, including IDE, aliases, themes, fonts, etc.
 
 ```bash
-brew upgrade
-brew install --cask wezterm
-brew install \
-    nvim \
-    ripgrep \
-    lazygit \
-    tmux
-ln -s ./zsh/aliasrc ~/.aliasrc
-tee -a $HOME/.zshrc << EOF
-if [ -f ~/.aliasrc ]; then
-  source $HOME/.aliasrc
-fi
-EOF
+bash setup.sh
 ```
 
