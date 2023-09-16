@@ -11,4 +11,11 @@ brew install \
     ripgrep \
     lazygit \
     tmux
+ln -s ./zsh/aliasrc ~/.aliasrc
+tee -a $HOME/.zshrc << EOF
+if [ -f ~/.aliasrc ]; then
+  source $HOME/.aliasrc
+fi
+EOF
 ```
+
