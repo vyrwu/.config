@@ -1,0 +1,7 @@
+**/
+!.gitignore
+!.gitmodules
+!README.md
+!/nvim
+!/tmux
+!/wezterm
