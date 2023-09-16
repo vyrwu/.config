@@ -5,6 +5,7 @@ Collection of all my MacOS/Linux configuration files.
 
 ```bash
 brew upgrade
+brew install --cask wezterm
 brew install \
     nvim \
     ripgrep \
