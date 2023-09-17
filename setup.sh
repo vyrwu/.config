@@ -10,11 +10,8 @@ brew install \
     tmux
 
 ### ZSH
-ln -s $PWD/zsh/aliasrc ~/.aliasrc
 tee -a $HOME/.zshrc << EOF
-if [ -f ~/.aliasrc ]; then
-  source $HOME/.aliasrc
-fi
+source $PWD/zsh/alias
 EOF
 
 ### GIT
