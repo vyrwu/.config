@@ -9,3 +9,8 @@ for development, including IDE, aliases, themes, fonts, etc.
 bash setup.sh
 ```
 
+## TODO
+- [] Fix helm_ls
+- [] Enable auto-format on save
+- [] Make `git pull --recurse-submodules` trach submodule branches, not detached HEAD
+- [] Better Nvim color theme
