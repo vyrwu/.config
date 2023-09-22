@@ -8,12 +8,17 @@ brew install \
     ripgrep \
     lazygit \
     tmux \
-    wget
+    wget \
+    node
+
+mkdir "$HOME/.npm-global"
+npm config set prefix "$HOME/.npm-global"
 
 ### ZSH
 tee -a $HOME/.zshrc << EOF
 source $PWD/zsh/alias
-export PATH=\$PATH:$HOME/.local/bin
+export PATH="\$PATH:$HOME/.local/bin"
+export PATH="\$PATH:$HOME/.npm-global/bin"
 EOF
 
 ### GIT
@@ -24,3 +29,6 @@ EOF
 
 wget -O $HOME/.local/bin/helm_ls https://github.com/mrjosh/helm-ls/releases/download/master/helm_ls_darwin_amd64 
 chmod +x $HOME/.local/bin/helm_ls 
+
+npm i -g vscode-langservers-extracted
+

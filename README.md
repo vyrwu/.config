@@ -11,7 +11,7 @@ bash setup.sh
 
 ## TODO
 - [x] Fix helm_ls
-- [] Enable auto-format on save
+- [x] Enable auto-format on save
 - [] Make `git pull --recurse-submodules` trach submodule branches, not detached HEAD
 - [] Better Nvim color theme
 - [] Fix jsonls
