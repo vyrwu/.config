@@ -10,7 +10,9 @@ bash setup.sh
 ```
 
 ## TODO
-- [] Fix helm_ls
+- [x] Fix helm_ls
 - [] Enable auto-format on save
 - [] Make `git pull --recurse-submodules` trach submodule branches, not detached HEAD
 - [] Better Nvim color theme
+- [] Fix jsonls
+- [] Install dadbod for DB management
