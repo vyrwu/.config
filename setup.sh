@@ -9,7 +9,8 @@ brew install \
     lazygit \
     tmux \
     wget \
-    node
+    node \
+    fsouza/prettierd/prettierd
 
 mkdir "$HOME/.npm-global"
 npm config set prefix "$HOME/.npm-global"

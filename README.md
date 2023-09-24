@@ -14,5 +14,5 @@ bash setup.sh
 - [x] Enable auto-format on save
 - [] Make `git pull --recurse-submodules` trach submodule branches, not detached HEAD
 - [] Better Nvim color theme
-- [] Fix jsonls
+- [x] Fix jsonls
 - [] Install dadbod for DB management
