@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "write-good": false,
+    "en-spell": {
+      "personalDictionary": [
+        "Kinesis",
+        "Firehose",
+        "Datadog",
+        "ElasticSearch",
+        "Rekognition",
+        "AVRO",
+        "HTTPS",
+        "decrypts"
+      ]
+    }
+  }
+}

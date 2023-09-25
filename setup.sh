@@ -32,6 +32,12 @@ EOF
 wget -O $HOME/.local/bin/helm_ls https://github.com/mrjosh/helm-ls/releases/download/master/helm_ls_darwin_amd64
 chmod +x $HOME/.local/bin/helm_ls
 
-npm i -g vscode-langservers-extracted
+npm i -g \
+  vscode-langservers-extracted \
+  textlint \
+  textlint-rule-write-good \
+  textlint-rule-en-spell
 
 go install github.com/katbyte/terrafmt@latest
+
+cp -f ./.textlintrc.json $HOME
