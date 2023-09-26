@@ -10,7 +10,14 @@
         "Rekognition",
         "AVRO",
         "HTTPS",
-        "decrypts"
+        "decrypts",
+        "Serverless",
+        "serverless",
+        "DeepLens",
+        "SageMaker",
+        "PySpark",
+        "Nvim",
+        "textlint"
       ]
     }
   }

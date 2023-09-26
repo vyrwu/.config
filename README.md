@@ -20,3 +20,6 @@ bash setup.sh
 - [x] Fix jsonls
 - [] Install dadbod for DB management
 - [] Good text linting (manage textlint from .config)
+- [] Replace null-ls with https://github.com/mhartington/formatter.nvim
+- [] Fix .zshrc management stuff
+
