@@ -20,7 +20,9 @@
         "textlint",
         "scalable",
         "ElastiCache",
-        "amongst"
+        "amongst",
+        "Helmfile",
+        "helmfile"
       ]
     }
   }
