@@ -1,0 +1,49 @@
+#!/bin/bash
+
+aws_user=$(aws sts get-caller-identity | jq -r '.UserId')
+
+echo ""
+echo "Insert environment name:"
+read environment
+
+echo ""
+echo "Insert owner team:"
+read team
+
+IFS='' read -r -d '' tags <<EOF
+[
+    {"Key": "environment", "Value": "${environment}"},
+    {"Key": "team", "Value": "${team}"},
+    {"Key": "function", "Value": "configuration"},
+    {"Key": "user-data", "Value": "false"},
+    {"Key": "managed-by", "Value": "aws-cli"},
+    {"Key": "created-by", "Value": "${aws_user}"}
+]
+EOF
+
+touch /tmp/upload_variable > /dev/null 2>&1
+
+echo ""
+echo "Insert parameter key:"
+read key
+
+# read -r -d '' value << EOM
+# multiline string
+# EOM
+
+echo ""
+echo "Insert parameter value (input hidden):"
+stty -echo
+read value
+stty echo
+
+printf "%s" "${value}" > /tmp/upload_variable
+aws ssm put-parameter \
+    --name "${key}" \
+    --value file:///tmp/upload_variable \
+    --type "SecureString" \
+    --tags "${tags}"
+rm /tmp/upload_variable
+
+trap "rm /tmp/upload_variable > /dev/null 2>&1" EXIT
+echo "DONE!"
