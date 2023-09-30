@@ -19,7 +19,8 @@ bash setup.sh
 - [] Better Nvim color theme
 - [x] Fix jsonls
 - [] Install dadbod for DB management
-- [] Good text linting (manage textlint from .config)
+- [x] Good text linting (manage textlint from .config)
 - [] Replace null-ls with https://github.com/mhartington/formatter.nvim
 - [] Fix .zshrc management stuff
+- [] Use ansible to manage my PC stuff
 
