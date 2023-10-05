@@ -12,6 +12,13 @@ brew install \
     node \
     fsouza/prettierd/prettierd
 
+brew install \
+    mysql-client \
+    libpq \
+    redis
+
+brew link --force libpq
+
 mkdir "$HOME/.npm-global"
 npm config set prefix "$HOME/.npm-global"
 

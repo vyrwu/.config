@@ -22,7 +22,9 @@
         "ElastiCache",
         "amongst",
         "Helmfile",
-        "helmfile"
+        "helmfile",
+        "AppFlow",
+        "POSIX"
       ]
     }
   }

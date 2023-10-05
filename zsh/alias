@@ -3,8 +3,6 @@
 alias tf='terraform'
 alias tf119='${HOME}/Downloads/terraform'
 
-alias mysql='mysqlsh'
-
 alias python='python3'
 
 alias k='kubectl'

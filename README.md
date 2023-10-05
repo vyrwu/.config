@@ -15,12 +15,12 @@ bash setup.sh
 
 - [x] Fix helm_ls
 - [x] Enable auto-format on save
-- [] Make `git pull --recurse-submodules` trach submodule branches, not detached HEAD
-- [] Better Nvim color theme
+- [x] Make `git pull --recurse-submodules` trach submodule branches, not detached HEAD
+- [x] Better Nvim color theme
 - [x] Fix jsonls
-- [] Install dadbod for DB management
 - [x] Good text linting (manage textlint from .config)
+- [x] Fix .zshrc management stuff
+- [x] Install dadbod for DB management
 - [] Replace null-ls with https://github.com/mhartington/formatter.nvim
-- [] Fix .zshrc management stuff
 - [] Use ansible to manage my PC stuff
 
