@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.npm-global/bin"
+export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:$HOME/.config/bin"
+
+export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json"
+
+export DVY="${HOME}/code/github/vyrwu"
+export GVY="https://github.com/vyrwu"
