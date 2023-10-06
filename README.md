@@ -22,5 +22,6 @@ bash setup.sh
 - [x] Fix .zshrc management stuff
 - [x] Install dadbod for DB management
 - [] Replace null-ls with https://github.com/mhartington/formatter.nvim
-- [] Use ansible to manage my PC stuff
-
+- [] .config: use ansible to manage all this stuff
+- [] .config/nvim: improve navigating across multiple files
+- [] .config/nvim: how to close these forever open buffers? 
