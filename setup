@@ -10,7 +10,8 @@ brew install \
     tmux \
     wget \
     node \
-    fsouza/prettierd/prettierd
+    fsouza/prettierd/prettierd \
+    go
 
 brew install \
     mysql-client \
@@ -47,4 +48,8 @@ npm i -g \
   textlint-rule-write-good \
   textlint-rule-en-spell
 
-go install github.com/katbyte/terrafmt@latest
+go install \
+  github.com/katbyte/terrafmt@latest \
+  mvdan.cc/gofumpt@latest
+
+curl -sS https://webi.sh/shfmt | sh
