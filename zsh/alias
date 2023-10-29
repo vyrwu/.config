@@ -14,3 +14,7 @@ alias i='istioctl'
 alias tfws='terraform workspace select'
 
 alias k9h='k9s --headless'
+
+alias tffv='terraform fmt --recursive && tf validate'
+
+alias ghpcf='gh pr create --fill'

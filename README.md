@@ -25,4 +25,5 @@ bash setup.sh
 - [x] Replace null-ls with conform & nvim-lint
 - [] .config: use ansible to manage all this stuff
 - [] .config/nvim: improve navigating across multiple files
-- [] .config/nvim: how to close these forever open buffers?
+- [] .config/nvim: how to close these forever open buffers? 
+- [] colorize nvim-tree based on git changes
