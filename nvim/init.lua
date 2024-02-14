@@ -1,3 +1,10 @@
+-- set indentation
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+
 -- set leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -93,6 +100,7 @@ require("lazy").setup({
           "--line-number",
           "--column",
           "--smart-case",
+          "--hidden",
         },
         file_ignore_patterns = {
           "vendor/",
@@ -101,8 +109,8 @@ require("lazy").setup({
           ".terraform/",
         },
         prompt_prefix = "   ",
-        file_sorter = require("telescope.sorters").get_fuzzy_file,
-        generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+        -- file_sorter = require("telescope.sorters").get_fuzzy_file,
+        -- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         set_env = { ["COLORTERM"] = "truecolor" },
         pickers = {
@@ -263,6 +271,33 @@ require("lazy").setup({
     dependencies = {
       -- helm_ls
       { "towolf/vim-helm", lazy = false },
+      -- completion
+      {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        dependencies = {
+          "hrsh7th/cmp-cmdline",
+          "hrsh7th/cmp-nvim-lsp",
+          "hrsh7th/cmp-buffer",
+          "hrsh7th/cmp-path",
+        },
+        config = function()
+          local cmp = require("cmp")
+          cmp.setup({
+            mapping = cmp.mapping.preset.insert({
+              ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+              ["<C-d>"] = cmp.mapping.scroll_docs(4),
+              ["<C-c>"] = cmp.mapping.abort(),
+              ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            }),
+            sources = cmp.config.sources({
+              { name = "nvim_lsp" },
+              { name = "vsnip" },
+              { name = "buffer" },
+            }),
+          })
+        end,
+      },
     },
     config = function()
       local on_attach = function(client, bufnr)
