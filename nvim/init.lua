@@ -84,7 +84,9 @@ require("lazy").setup({
     },
     init = function()
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+      vim.keymap.set("n", "<leader>ff", function()
+        builtin.find_files({ hidden = true })
+      end, {})
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
       vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
@@ -115,14 +117,6 @@ require("lazy").setup({
         -- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         set_env = { ["COLORTERM"] = "truecolor" },
-        pickers = {
-          find_files = {
-            hidden = true,
-          },
-          diagnostics = {
-            line_width = "full",
-          },
-        },
       },
 
       extensions_list = { "fzf" },
