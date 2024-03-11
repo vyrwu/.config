@@ -81,6 +81,10 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+      },
     },
     init = function()
       local builtin = require("telescope.builtin")
@@ -91,9 +95,25 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
       vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {})
+      vim.api.nvim_set_keymap(
+        "n",
+        "<space>fb",
+        ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+        { noremap = true }
+      )
+      require("telescope").load_extension("fzf")
+      require("telescope").load_extension("file_browser")
     end,
     opts = {
       defaults = {
+        layout_strategy = "vertical",
+        layout_config = {
+          vertical = {
+            height = 0.95,
+            width = 0.95,
+            preview_height = 0.6,
+          },
+        },
         wrap_results = true,
         vimgrep_arguments = {
           "rg",
@@ -118,7 +138,6 @@ require("lazy").setup({
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         set_env = { ["COLORTERM"] = "truecolor" },
       },
-
       extensions_list = { "fzf" },
       extensions = {
         fzf = {
