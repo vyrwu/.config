@@ -56,6 +56,13 @@ vim.keymap.set("v", "<", "<gv", { noremap = true })
 -- dismiss search highlights
 vim.keymap.set("n", "<C-c>", "<cmd> noh <CR>", {})
 
+-- save buffer on :W as well as :w
+vim.api.nvim_create_user_command(
+  "W",
+  "<line1>,<line2>write<bang>",
+  { bang, range = "%", complete = "file", nargs = "*" }
+)
+
 -- set system clipboard to vim register
 vim.opt.clipboard = "unnamedplus"
 
