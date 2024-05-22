@@ -1,3 +1,5 @@
+vim.lsp.set_log_level("off")
+
 -- set indentation
 vim.opt.expandtab = true
 vim.opt.smartindent = true
