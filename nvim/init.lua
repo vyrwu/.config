@@ -382,6 +382,9 @@ require("lazy").setup({
 
       for _, v in pairs(lsps) do
         if v == "gopls" then
+          capabilities.workspace.didChangeWatchedFiles.dynamicRegistration =
+            true
+          capabilities.workspace.workspaceFolders = true
           lspconfig[v].setup({
             on_attach = on_attach,
             capabilities = capabilities,
@@ -390,10 +393,13 @@ require("lazy").setup({
             root_dir = util.root_pattern("go.work", "go.mod", ".git"),
             settings = {
               gopls = {
+                buildFlags = { "-tags=integration" },
                 completeUnimported = true,
                 usePlaceholders = true,
+                staticcheck = true,
+                gofumpt = true,
                 analyses = {
-                  unusedarams = true,
+                  unusedparams = true,
                 },
               },
             },
