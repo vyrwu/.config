@@ -18,3 +18,5 @@ alias k9h='k9s --headless'
 alias tffv='terraform fmt --recursive && tf validate'
 
 alias ghpcf='gh pr create --fill'
+
+alias act='DOCKER_HOST=$(docker context inspect --format '{{.Endpoints.docker.Host}}') /opt/homebrew/bin/act'

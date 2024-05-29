@@ -19,6 +19,8 @@ brew install \
 
 brew link --force libpq
 
+brew install act
+
 mkdir "$HOME/.npm-global"
 npm config set prefix "$HOME/.npm-global"
 
