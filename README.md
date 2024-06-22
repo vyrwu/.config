@@ -4,8 +4,8 @@ Collection of all my MacOS/Linux configuration files.
 
 ## Installation
 
-This should ideally install and configure all tools required for
-development, including IDE, aliases, themes, fonts, etc.
+This should ideally install and configure all tools required for development,
+including IDE, aliases, themes, fonts, etc.
 
 ```bash
 bash setup.sh
@@ -13,17 +13,11 @@ bash setup.sh
 
 ## TODO
 
-- [x] Fix helm_ls
-- [x] Enable auto-format on save
-- [x] Make `git pull --recurse-submodules` trach submodule branches,
-      not detached HEAD
-- [x] Better Nvim color theme
-- [x] Fix jsonls
-- [x] Good text linting (manage textlint from .config)
-- [x] Fix .zshrc management stuff
-- [x] Install dadbod for DB management
-- [x] Replace null-ls with conform & nvim-lint
-- [] .config: use ansible to manage all this stuff
-- [] .config/nvim: improve navigating across multiple files
-- [] .config/nvim: how to close these forever open buffers? 
-- [] colorize nvim-tree based on git changes
+- [x] nvim(telescope): support hiddent files across the board
+- [] nvim: improve cursor positioning (keep around the middle of the screen)
+- [] nvim: disable continuous scrolling on key press&hold
+- [] terminal: improve fs navigation
+- [x] nvim: improve open buffer navigation & management
+- [] env: use ansible or nix to have a reproducible development environment
+- [] (optional) go: use tree-sitter bindings to navigate between
+  functions/args/etc.
