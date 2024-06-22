@@ -140,7 +140,6 @@ require("lazy").setup({
           "vendor/",
           "node_modules/",
           ".git/",
-          ".terraform/",
         },
         prompt_prefix = "   ",
         -- file_sorter = require("telescope.sorters").get_fuzzy_file,
