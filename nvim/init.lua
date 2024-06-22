@@ -155,6 +155,9 @@ require("lazy").setup({
           override_file_sorter = true,
           case_mode = "smart_case",
         },
+        file_browser = {
+          hidden = true,
+        },
       },
     },
   },
