@@ -234,7 +234,11 @@ require("lazy").setup({
           markdown = { "prettierd" },
           lua = { "stylua" },
           python = { "black" },
-          go = { "gofumpt", "golines", "goimports_reviser" },
+          go = {
+            "gofumpt",
+            "golines",
+            "goimports_reviser",
+          },
           terraform = { "terraform_fmt" },
           ["terraform-vars"] = { "terraform_fmt" },
           bash = { "shfmt" },
@@ -397,7 +401,7 @@ require("lazy").setup({
             root_dir = util.root_pattern("go.work", "go.mod", ".git"),
             settings = {
               gopls = {
-                buildFlags = { "-tags=integration" },
+                buildFlags = { "-tags=e2e" },
                 completeUnimported = true,
                 usePlaceholders = true,
                 staticcheck = true,
