@@ -275,6 +275,7 @@ require("lazy").setup({
         "golines",
         "shfmt",
         "prerrierd",
+        "typescript-language-server",
       },
       automatic_installation = true,
       max_concurrent_installers = 10,
@@ -380,6 +381,7 @@ require("lazy").setup({
         "jsonls",
         "yamlls",
         "bashls",
+        "tsserver",
       }
 
       for _, v in pairs(lsps) do
