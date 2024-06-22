@@ -21,37 +21,6 @@ vim.opt.colorcolumn = "80"
 -- match terminal theme with nvim
 vim.opt.termguicolors = true
 
--- disable arrow keys
-vim.keymap.set(
-  "",
-  "<Left>",
-  '<cmd>echo "ᕙ(⇀‸↼‶)ᕗ h, not Left!"<CR>',
-  { noremap = true }
-)
-vim.keymap.set(
-  "",
-  "<Right>",
-  '<cmd>echo "ᕙ(⇀‸↼‶)ᕗ l, not Right!"<CR>',
-  { noremap = true }
-)
-vim.keymap.set(
-  "",
-  "<Up>",
-  '<cmd>echo "ᕙ(⇀‸↼‶)ᕗ k, not Up!"<CR>',
-  { noremap = true }
-)
-vim.keymap.set(
-  "",
-  "<Down>",
-  '<cmd>echo "ᕙ(⇀‸↼‶)ᕗ j, not Down!"<CR>',
-  { noremap = true }
-)
-
-vim.keymap.set("i", "<C-h>", "<Left>", { noremap = true })
-vim.keymap.set("i", "<C-l>", "<Right>", { noremap = true })
-vim.keymap.set("i", "<C-k>", "<Up>", { noremap = true })
-vim.keymap.set("i", "<C-j>", "<Down>", { noremap = true })
-
 -- indent while remaining in visual mode
 vim.keymap.set("v", ">", ">gv", { noremap = true })
 vim.keymap.set("v", "<", "<gv", { noremap = true })
@@ -385,7 +354,7 @@ require("lazy").setup({
         "terraformls",
         "helm_ls",
         "jsonls",
-        "yamlls",
+        -- "yamlls",
         "bashls",
         "tsserver",
       }
@@ -468,5 +437,11 @@ require("lazy").setup({
         lint.try_lint()
       end, { desc = "Trigger lint for file" })
     end,
+  },
+  -- Disables continuous key press to build better Vim navigation habits
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {},
   },
 })

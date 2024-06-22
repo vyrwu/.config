@@ -15,9 +15,10 @@ bash setup.sh
 
 - [x] nvim(telescope): support hiddent files across the board
 - [] nvim: improve cursor positioning (keep around the middle of the screen)
-- [] nvim: disable continuous scrolling on key press&hold
+- [x] nvim: disable continuous scrolling on key press&hold
 - [] terminal: improve fs navigation
 - [x] nvim: improve open buffer navigation & management
 - [] env: use ansible or nix to have a reproducible development environment
 - [] (optional) go: use tree-sitter bindings to navigate between
   functions/args/etc.
+- [] nvim: telescope: find references
