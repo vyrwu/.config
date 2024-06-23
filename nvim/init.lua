@@ -41,6 +41,15 @@ vim.opt.clipboard = "unnamedplus"
 -- offset cursor position by minimum 10 lines up/down
 vim.opt.scrolloff = 999
 
+vim.opt.list = true
+vim.opt.listchars = {
+  -- eol = "↵",
+  -- space = "~",
+  trail = "~",
+  tab = ">-",
+  nbsp = "␣",
+}
+
 -- setup lazyvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -448,4 +457,5 @@ require("lazy").setup({
     opts = {},
   },
   { "nvim-treesitter/nvim-treesitter-context" },
+  { "tris203/precognition.nvim", opts = {} },
 })
