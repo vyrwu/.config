@@ -38,6 +38,9 @@ vim.api.nvim_create_user_command(
 -- set system clipboard to vim register
 vim.opt.clipboard = "unnamedplus"
 
+-- offset cursor position by minimum 10 lines up/down
+vim.opt.scrolloff = 999
+
 -- setup lazyvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -444,4 +447,5 @@ require("lazy").setup({
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     opts = {},
   },
+  { "nvim-treesitter/nvim-treesitter-context" },
 })

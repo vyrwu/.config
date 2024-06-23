@@ -14,7 +14,7 @@ bash setup.sh
 ## TODO
 
 - [x] nvim(telescope): support hiddent files across the board
-- [] nvim: improve cursor positioning (keep around the middle of the screen)
+- [x] nvim: improve cursor positioning (keep around the middle of the screen)
 - [x] nvim: disable continuous scrolling on key press&hold
 - [] terminal: improve fs navigation
 - [x] nvim: improve open buffer navigation & management
