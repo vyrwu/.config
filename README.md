@@ -21,4 +21,4 @@ bash setup.sh
 - [] env: use ansible or nix to have a reproducible development environment
 - [] (optional) go: use tree-sitter bindings to navigate between
   functions/args/etc.
-- [] nvim: telescope: find references
+- [x] nvim: telescope: find references
