@@ -182,6 +182,7 @@ require("lazy").setup({
           "json",
           "bash",
           "regex",
+          "nix",
         },
         sync_install = false,
         highlight = { enable = true },
@@ -225,6 +226,7 @@ require("lazy").setup({
           terraform = { "terraform_fmt" },
           ["terraform-vars"] = { "terraform_fmt" },
           bash = { "shfmt" },
+          nix = { "nixpkgs_fmt" },
           ["*"] = { "codespell" },
           ["_"] = { "trim_whitespace" },
         },
@@ -263,6 +265,7 @@ require("lazy").setup({
         "shfmt",
         "prerrierd",
         "typescript-language-server",
+        "nixpkgs-fmt",
       },
       automatic_installation = true,
       max_concurrent_installers = 10,
@@ -331,7 +334,9 @@ require("lazy").setup({
             vim.lsp.buf.code_action,
             opts
           )
-          vim.keymap.set("n", "<leader>gr", function() require('telescope.builtin').lsp_references() end, opts)
+          vim.keymap.set("n", "<leader>gr", function()
+            require("telescope.builtin").lsp_references()
+          end, opts)
         end,
         config = function()
           local cmp = require("cmp")
