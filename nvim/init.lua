@@ -370,7 +370,7 @@ require("lazy").setup({
         "jsonls",
         -- "yamlls",
         "bashls",
-        "tsserver",
+        "ts_ls",
       }
 
       for _, v in pairs(lsps) do
@@ -459,5 +459,4 @@ require("lazy").setup({
     opts = {},
   },
   { "nvim-treesitter/nvim-treesitter-context" },
-  { "tris203/precognition.nvim", opts = {} },
 })
