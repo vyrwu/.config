@@ -13,12 +13,9 @@ bash setup.sh
 
 ## TODO
 
-- [x] nvim(telescope): support hiddent files across the board
-- [x] nvim: improve cursor positioning (keep around the middle of the screen)
-- [x] nvim: disable continuous scrolling on key press&hold
 - [] terminal: improve fs navigation
-- [x] nvim: improve open buffer navigation & management
 - [] env: use ansible or nix to have a reproducible development environment
+- Usability improvement: switch between dark/light mode via keybinding
+- Problem: tmux session management is chaotic
 - [] (optional) go: use tree-sitter bindings to navigate between
   functions/args/etc.
-- [x] nvim: telescope: find references
