@@ -428,7 +428,7 @@ require("lazy").setup({
       local lint = require("lint")
 
       lint.linters_by_ft = {
-        yaml = { "actionlint" },
+        -- yaml = { "actionlint" },
         javascript = { "eslint_d" },
         typescript = { "eslint_d" },
         javascriptreact = { "eslint_d" },
