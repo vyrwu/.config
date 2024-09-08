@@ -157,12 +157,9 @@ require("lazy").setup({
     end,
   },
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
+    "EdenEast/nightfox.nvim",
     config = function()
-      vim.cmd([[colorscheme tokyonight-night]])
+      vim.cmd("colorscheme nordfox")
     end,
   },
   {

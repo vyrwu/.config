@@ -3,7 +3,7 @@ local act = wezterm.action
 return {
   font = wezterm.font("FiraMono Nerd Font"),
   font_size = 16.0,
-  color_scheme = "tokyonight_night",
+  color_scheme = "nordfox",
   enable_tab_bar = false,
   keys = {
     {
