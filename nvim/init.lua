@@ -260,7 +260,7 @@ require("lazy").setup({
         "goimports-reviser",
         "golines",
         "shfmt",
-        "prerrierd",
+        "prettierd",
         "typescript-language-server",
         "nixpkgs-fmt",
       },
