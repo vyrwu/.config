@@ -263,6 +263,7 @@ require("lazy").setup({
         "prettierd",
         "typescript-language-server",
         "nixpkgs-fmt",
+        "pyright",
       },
       automatic_installation = true,
       max_concurrent_installers = 10,
@@ -371,6 +372,7 @@ require("lazy").setup({
         -- "yamlls",
         "bashls",
         "ts_ls",
+        "pyright",
       }
 
       for _, v in pairs(lsps) do
@@ -407,6 +409,15 @@ require("lazy").setup({
             cmd = { "helm_ls", "serve" },
             filetypes = { "helm" },
             root_dir = util.root_pattern("Chart.yaml"),
+          })
+          goto continue
+        end
+
+        if v == "pyright" then
+          lspconfig[v].setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = { "python" },
           })
           goto continue
         end
