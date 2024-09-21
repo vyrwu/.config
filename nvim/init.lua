@@ -252,7 +252,7 @@ require("lazy").setup({
         "marksman", --markdown
         "bash-language-server",
         "eslint_d",
-        "pylint",
+        -- "pylint",
         "actionlint",
         "black",
         "codespell",
@@ -449,7 +449,7 @@ require("lazy").setup({
         typescript = { "eslint_d" },
         javascriptreact = { "eslint_d" },
         typescriptreact = { "eslint_d" },
-        python = { "pylint" },
+        -- python = { "pylint" },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
