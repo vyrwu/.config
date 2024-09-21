@@ -237,7 +237,7 @@ require("lazy").setup({
   },
   {
     "williamboman/mason.nvim",
-    opts = {
+    config = function()
       ensure_installed = {
         "lua-language-server",
         "stylua",
@@ -264,10 +264,15 @@ require("lazy").setup({
         "typescript-language-server",
         "nixpkgs-fmt",
         "pyright",
-      },
-      automatic_installation = true,
-      max_concurrent_installers = 10,
-    },
+      }
+
+      vim.api.nvim_create_user_command("MasonInstallAll", function()
+        local packages = table.concat(ensure_installed, " ")
+        vim.cmd("MasonInstall " .. packages)
+      end, {})
+
+      require("mason").setup()
+    end,
   },
   {
     "kdheepak/lazygit.nvim",
