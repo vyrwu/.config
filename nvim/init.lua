@@ -223,7 +223,7 @@ require("lazy").setup({
           terraform = { "terraform_fmt" },
           ["terraform-vars"] = { "terraform_fmt" },
           bash = { "shfmt" },
-          nix = { "nixpkgs_fmt" },
+          nix = { "nixfmt" },
           ["*"] = { "codespell" },
           ["_"] = { "trim_whitespace" },
         },
@@ -262,7 +262,7 @@ require("lazy").setup({
         "shfmt",
         "prettierd",
         "typescript-language-server",
-        "nixpkgs-fmt",
+        "nil",
         "pyright",
       }
 
@@ -288,6 +288,7 @@ require("lazy").setup({
       { "<leader>gg", vim.cmd.LazyGit, desc = "Open LazyGit." },
     },
   },
+  { "LnL7/vim-nix", ft = "nix" },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -378,6 +379,7 @@ require("lazy").setup({
         "bashls",
         "ts_ls",
         "pyright",
+        "nil_ls",
       }
 
       for _, v in pairs(lsps) do

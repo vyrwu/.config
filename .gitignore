@@ -9,3 +9,5 @@
 !/zsh
 !/git
 !/bin
+!/nix
+!/nix-darwin
