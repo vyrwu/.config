@@ -1,0 +1,140 @@
+{
+  description = "Example Darwin system flake";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+    }:
+    let
+      configuration =
+        { pkgs, ... }:
+        {
+          environment = {
+            systemPackages = [
+              pkgs.vim
+            ];
+            shells = [
+              pkgs.bashInteractive
+              pkgs.zsh
+            ];
+          };
+
+          fonts.packages = [ pkgs.nerdfonts ];
+
+          # networking = {
+          #   dns = [
+          #     "8.8.8.8"
+          #     "8.8.4.4"
+          #     "2001:4860:4860::8888"
+          #     "2001:4860:4860::8844"
+          #   ];
+          #   knownNetworkServices = [
+          #     "LG Monitor Controls"
+          #     "USB 10/100/1000 LAN"
+          #     "Thunderbolt Bridge"
+          #     "Wi-Fi"
+          #     "iPhone USB"
+          #     "iPhone USB 2"
+          #   ];
+          # };
+
+          nix.settings.auto-optimise-store = true;
+          nix.optimise.automatic = true;
+
+          # Auto upgrade nix package and the daemon service.
+          services.nix-daemon.enable = true;
+          nix.package = pkgs.nix;
+
+          nix.settings.experimental-features = "nix-command flakes";
+
+          programs.zsh.enable = true; # default shell on catalina
+
+          # Set Git commit hash for darwin-version.
+          system.configurationRevision = self.rev or self.dirtyRev or null;
+
+          system.defaults.NSGlobalDomain.KeyRepeat = 2;
+          system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
+          system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 3.0;
+          system.defaults.dock.autohide = true;
+          system.defaults.dock.expose-animation-duration = 1.0;
+          system.defaults.dock.orientation = "left";
+          system.defaults.finder.CreateDesktop = false;
+          system.defaults.finder.ShowPathbar = true;
+          system.defaults.finder.ShowStatusBar = true;
+          system.keyboard.remapCapsLockToControl = true;
+          # TODO: the following option is broken:
+          # system.defaults.universalaccess.reduceMotion = 1;
+          # system.defaults.universalaccess.reduceTransparency = true;
+
+          # Used for backwards compatibility, please read the changelog before changing.
+          # $ darwin-rebuild changelog
+          system.stateVersion = 5;
+
+          nixpkgs = {
+            hostPlatform = "x86_64-darwin";
+            config.allowUnfree = true;
+          };
+
+          # error: Build users have unexpected UIDs, aborting activation
+          # The default Nix build user ID range has been adjusted for
+          # compatibility with macOS Sequoia 15. Your _nixbld1 user currently has
+          # UID 301 rather than the new default of 351.
+          #
+          # You can automatically migrate the users with the following command:
+          #
+          #     curl --proto '=https' --tlsv1.2 -sSf -L https://github.com/NixOS/nix/raw/master/scripts/sequoia-nixbld-user-migration.sh | bash -
+          #
+          # If you have no intention of upgrading to macOS Sequoia 15, or already
+          # have a custom UID range that you know is compatible with Sequoia, you
+          # can disable this check by setting:
+
+          ids.uids.nixbld = 350;
+          ids.gids.nixbld = 350;
+
+          nix.configureBuildUsers = true;
+
+          security.pam.enableSudoTouchIdAuth = true;
+
+          home-manager.backupFileExtension = "backup";
+
+          users.users.alek = {
+            name = "alek";
+            home = "/Users/alek";
+          };
+
+          homebrew.enable = true;
+          homebrew.casks = [
+            "wezterm"
+          ];
+        };
+    in
+    {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#Aleks-MacBook-Pro
+      darwinConfigurations."Aleks-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        modules = [
+          configuration
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.alek = import ./home.nix;
+          }
+        ];
+      };
+
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations."Aleks-MacBook-Pro".pkgs;
+    };
+}

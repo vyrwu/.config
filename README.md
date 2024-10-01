@@ -19,3 +19,7 @@ bash setup.sh
 - Problem: tmux session management is chaotic
 - [] (optional) go: use tree-sitter bindings to navigate between
   functions/args/etc.
+- try tool: newsboat
+- try tool: git-sync
+- single command setup
+- add some nice oh my zsh plugins
