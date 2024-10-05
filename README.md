@@ -2,20 +2,30 @@
 
 Collection of all my MacOS/Linux configuration files.
 
-## Installation
+## Initial installation
 
-This should ideally install and configure all tools required for development,
-including IDE, aliases, themes, fonts, etc.
+Requires a working [Nix](https://nixos.org/download/) installation.
 
 ```bash
-bash setup.sh
+make install
+```
+
+## Applying changes
+
+```bash
+make update
 ```
 
 ## TODO
 
-- [] terminal: improve fs navigation
-- [] env: use ansible or nix to have a reproducible development environment
-- Usability improvement: switch between dark/light mode via keybinding
-- Problem: tmux session management is chaotic
-- [] (optional) go: use tree-sitter bindings to navigate between
-  functions/args/etc.
+- Improve fs navigation inside terminal
+- Followup on managing WezTerm using Nix
+- Try migrating Mason packages to Nix
+- Switch between dark/light mode via keybinding
+- Improve tmux session management and terminal window navigation
+- Create keybindings for tree-sitter objects (functions/args/etc.)
+- Find a way to follow up on industry news (newsboat)
+- Automatically sync specific git repos (git-sync)
+- Install Nix flake directly from GitHub
+- Review oh my zsh plugins
+- Check in my Oryx keyboard layout to Version Control
