@@ -56,7 +56,7 @@
 
   programs.zsh.initExtra = ''
     # SYSTEM PATH
-    export PATH="$PATH:$HOME/.config/bin"
+    export PATH="$PATH:$HOME/.config/scripts"
     export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 
     # ENVIRONMENT VARIABLES
