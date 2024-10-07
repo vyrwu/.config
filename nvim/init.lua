@@ -236,45 +236,6 @@ require("lazy").setup({
     end,
   },
   {
-    "williamboman/mason.nvim",
-    config = function()
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "golangci-lint",
-        "gopls",
-        "terraform-ls",
-        "tflint",
-        "helm-ls",
-        "yaml-language-server",
-        "yamllint",
-        "json-lsp",
-        "marksman", --markdown
-        "bash-language-server",
-        "eslint_d",
-        -- "pylint",
-        "actionlint",
-        "black",
-        "codespell",
-        "gofumpt",
-        "goimports-reviser",
-        "golines",
-        "shfmt",
-        "prettierd",
-        "typescript-language-server",
-        "nil",
-        "pyright",
-      }
-
-      vim.api.nvim_create_user_command("MasonInstallAll", function()
-        local packages = table.concat(ensure_installed, " ")
-        vim.cmd("MasonInstall " .. packages)
-      end, {})
-
-      require("mason").setup()
-    end,
-  },
-  {
     "kdheepak/lazygit.nvim",
     lazy = false,
     -- optional for floating window border decoration
