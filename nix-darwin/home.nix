@@ -67,6 +67,7 @@
     pkgs.prettierd
   ];
 
+  programs.zsh.enable = true;
   programs.zsh.shellAliases = {
     tf = "terraform";
     tfws = "terraform workspace select";
@@ -82,12 +83,9 @@
   programs.zsh.initExtra = ''
     # SYSTEM PATH
     export PATH="$PATH:$HOME/.config/scripts"
-    export PATH="$PATH:$HOME/.local/share/nvim/mason/bin"
 
     # ENVIRONMENT VARIABLES
     export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json"
-    export DVY="$HOME/code/github/alek"
-    export GVY="https://github.com/alek"
   '';
   programs.zsh.autosuggestion.enable = true;
 
