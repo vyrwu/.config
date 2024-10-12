@@ -26,6 +26,10 @@
     pkgs.istioctl
     pkgs.gh
     pkgs.k9s
+    pkgs.kubernetes-helm
+    pkgs.helmfile
+    pkgs.colima
+    pkgs.aws-vault
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
@@ -34,11 +38,33 @@
     # LANGUAGE SERVERS
     pkgs.helm-ls
     pkgs.vscode-langservers-extracted
-    # FORMATTERS
-    pkgs.nixfmt-rfc-style
+    pkgs.lua-language-server
+    pkgs.gopls
+    pkgs.terraform-ls
+    pkgs.yaml-language-server
+    pkgs.bash-language-server
+    pkgs.nodePackages.typescript-language-server
+    pkgs.nil
+    pkgs.pyright
+    # LINTERS
     pkgs.textlint
     pkgs.textlint-rule-write-good
     pkgs.textlint-rule-common-misspellings
+    pkgs.tflint
+    pkgs.golangci-lint
+    pkgs.yamllint
+    pkgs.eslint_d
+    pkgs.actionlint
+    # FORMATTERS
+    pkgs.nixfmt-rfc-style
+    pkgs.stylua
+    pkgs.black
+    pkgs.codespell
+    pkgs.gofumpt
+    pkgs.goimports-reviser
+    pkgs.golines
+    pkgs.shfmt
+    pkgs.prettierd
   ];
 
   programs.zsh.shellAliases = {
@@ -53,7 +79,6 @@
     k9h = "k9s --headless";
     ghpr = "gh pr create --fill";
   };
-
   programs.zsh.initExtra = ''
     # SYSTEM PATH
     export PATH="$PATH:$HOME/.config/scripts"
@@ -64,6 +89,7 @@
     export DVY="$HOME/code/github/alek"
     export GVY="https://github.com/alek"
   '';
+  programs.zsh.autosuggestion.enable = true;
 
   programs.git.aliases = {
     co = "checkout";
@@ -73,4 +99,7 @@
   programs.zsh.oh-my-zsh.enable = true;
   programs.zsh.oh-my-zsh.plugins = [ "git" ];
   programs.zsh.oh-my-zsh.theme = "agnoster";
+
+  programs.starship.enable = true;
+  programs.starship.enableZshIntegration = true;
 }

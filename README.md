@@ -20,7 +20,6 @@ make update
 
 - Improve fs navigation inside terminal
 - Followup on managing WezTerm using Nix
-- Try migrating Mason packages to Nix
 - Switch between dark/light mode via keybinding
 - Improve tmux session management and terminal window navigation
 - Create keybindings for tree-sitter objects (functions/args/etc.)
