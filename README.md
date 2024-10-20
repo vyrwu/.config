@@ -28,3 +28,6 @@ make update
 - Install Nix flake directly from GitHub
 - Review oh my zsh plugins
 - Check in my Oryx keyboard layout to Version Control
+- Improve multi-machine Nix config management
+- Manage dotfiles with Nix, not git repo
+- Manage secrets and SSH keys with Nix // Inspiration: https://github.com/Baitinq/nixos-config
