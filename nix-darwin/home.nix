@@ -12,9 +12,6 @@
 
   ### OWN CONFIG
 
-  home.username = "alek";
-  home.homeDirectory = "/Users/alek";
-
   home.packages = [
     pkgs.git
     pkgs.neovim

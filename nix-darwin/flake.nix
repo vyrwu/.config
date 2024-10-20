@@ -47,8 +47,8 @@
           nix.settings.auto-optimise-store = true;
           nix.optimise.automatic = true;
           nix.configureBuildUsers = true;
+
           nixpkgs = {
-            hostPlatform = "x86_64-darwin";
             config.allowUnfree = true;
           };
 
@@ -66,67 +66,86 @@
           # system.defaults.universalaccess.reduceMotion = 1;
           # system.defaults.universalaccess.reduceTransparency = true;
 
-          # error: Build users have unexpected UIDs, aborting activation
-          # The default Nix build user ID range has been adjusted for
-          # compatibility with macOS Sequoia 15. Your _nixbld1 user currently has
-          # UID 301 rather than the new default of 351.
-          #
-          # You can automatically migrate the users with the following command:
-          #
-          #     curl --proto '=https' --tlsv1.2 -sSf -L https://github.com/NixOS/nix/raw/master/scripts/sequoia-nixbld-user-migration.sh | bash -
-          #
-          # If you have no intention of upgrading to macOS Sequoia 15, or already
-          # have a custom UID range that you know is compatible with Sequoia, you
-          # can disable this check by setting:
-
-          ids.uids.nixbld = 350;
-          ids.gids.nixbld = 350;
-
           security.pam.enableSudoTouchIdAuth = true;
 
           home-manager.backupFileExtension = "backup";
-
-          users.users.alek = {
-            name = "alek";
-            home = "/Users/alek";
-          };
 
           homebrew.enable = true;
           homebrew.casks = [
             "wezterm"
           ];
-
-          # TODO: configure this
-          # networking = 
-          #   dns = [
-          #     "8.8.8.8"
-          #     "8.8.4.4"
-          #     "2001:4860:4860::8888"
-          #     "2001:4860:4860::8844"
-          #   ];
-          #   knownNetworkServices = [
-          #     "LG Monitor Controls"
-          #     "USB 10/100/1000 LAN"
-          #     "Thunderbolt Bridge"
-          #     "Wi-Fi"
-          #     "iPhone USB"
-          #     "iPhone USB 2"
-          #   ];
-          # };
         };
     in
     {
-      darwinConfigurations."Aleks-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-        modules = [
-          configuration
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.alek = import ./home.nix;
-          }
-        ];
+      darwinConfigurations = {
+        "Aleksanders-MacBook" = nix-darwin.lib.darwinSystem {
+          modules = [
+            configuration
+            {
+              nixpkgs = {
+                hostPlatform = "aarch64-darwin";
+              };
+
+              ids.uids.nixbld = 300;
+              ids.gids.nixbld = 30000;
+
+              users.users."aleksandernowak" = {
+                name = "aleksandernowak";
+                home = "/Users/aleksandernowak";
+              };
+            }
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."aleksandernowak" = {
+                imports = [ ./home.nix ];
+                home.username = "aleksandernowak";
+                home.homeDirectory = "/Users/aleksandernowak";
+              };
+            }
+          ];
+        };
+        "Aleks-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+          modules = [
+            configuration
+            {
+              nixpkgs = {
+                hostPlatform = "x86_64-darwin";
+              };
+
+              # error: Build users have unexpected UIDs, aborting activation
+              # The default Nix build user ID range has been adjusted for
+              # compatibility with macOS Sequoia 15. Your _nixbld1 user currently has
+              # UID 301 rather than the new default of 351.
+              #
+              # You can automatically migrate the users with the following command:
+              #
+              #     curl --proto '=https' --tlsv1.2 -sSf -L https://github.com/NixOS/nix/raw/master/scripts/sequoia-nixbld-user-migration.sh | bash -
+              #
+              # If you have no intention of upgrading to macOS Sequoia 15, or already
+              # have a custom UID range that you know is compatible with Sequoia, you
+              # can disable this check by setting:
+              ids.uids.nixbld = 350;
+              ids.gids.nixbld = 350;
+
+              users.users."alek" = {
+                name = "alek";
+                home = "/Users/alek";
+              };
+            }
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."alek" = {
+                imports = [ ./home.nix ];
+                home.username = "alek";
+                home.homeDirectory = "/Users/alek";
+              };
+            }
+          ];
+        };
       };
-      darwinPackages = self.darwinConfigurations."Aleks-MacBook-Pro".pkgs;
     };
 }
