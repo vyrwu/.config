@@ -86,7 +86,7 @@
                 hostPlatform = "aarch64-darwin";
               };
 
-              ids.uids.nixbld = 300;
+              ids.uids.nixbld = 350;
               ids.gids.nixbld = 30000;
 
               users.users."aleksandernowak" = {
