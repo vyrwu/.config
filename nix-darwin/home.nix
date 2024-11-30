@@ -59,7 +59,6 @@
     pkgs.codespell
     pkgs.gofumpt
     pkgs.goimports-reviser
-    pkgs.goimports
     pkgs.golines
     pkgs.shfmt
     pkgs.prettierd
