@@ -27,11 +27,15 @@
     pkgs.helmfile
     pkgs.colima
     pkgs.aws-vault
+    pkgs.poetry
+    pkgs.pre-commit
+    pkgs.virtualenv
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
     pkgs.terraform
-    pkgs.python3
+    pkgs.python312
+    pkgs.python312Packages.pip
     # LANGUAGE SERVERS
     pkgs.helm-ls
     pkgs.vscode-langservers-extracted
@@ -52,6 +56,7 @@
     pkgs.yamllint
     pkgs.eslint_d
     pkgs.actionlint
+    pkgs.mypy
     # FORMATTERS
     pkgs.nixfmt-rfc-style
     pkgs.stylua
@@ -62,6 +67,7 @@
     pkgs.golines
     pkgs.shfmt
     pkgs.prettierd
+    pkgs.isort
   ];
 
   programs.zsh.enable = true;
@@ -79,6 +85,12 @@
   };
   programs.zsh.initExtra = ''
     # SYSTEM PATH
+    # Disables builtin Python.
+    export PATH=$(echo $PATH | sed -r 's|/Library/Frameworks/Python.framework/Versions/3.11/bin:||')
+    export PATH=$(echo $PATH | sed -r 's|/Library/Frameworks/Python.framework/Versions/3.10/bin:||')
+    # FIXME: Prioritise Nix binaries over Homebrew, until it is removed all together.
+    export PATH=$(echo $PATH | sed -r "s|(/opt/homebrew/bin)(:)(.*)|\3\2\1|")
+    export PATH=$(echo $PATH | sed -r "s|(/opt/homebrew/sbin)(:)(.*)|\3\2\1|")
     export PATH="$PATH:$HOME/.config/scripts"
 
     # ENVIRONMENT VARIABLES
