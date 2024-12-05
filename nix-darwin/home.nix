@@ -96,6 +96,7 @@
     export PATH=$(echo $PATH | sed -r "s|(/opt/homebrew/sbin)(:)(.*)|\3\2\1|")
     export PATH="$PATH:$HOME/.config/scripts"
 
+    export EDITOR="nvim"
     # ENVIRONMENT VARIABLES
     export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json"
   '';
