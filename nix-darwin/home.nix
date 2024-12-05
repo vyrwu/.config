@@ -13,6 +13,7 @@
   ### OWN CONFIG
 
   home.packages = [
+    pkgs.nix-search-cli
     pkgs.git
     pkgs.neovim
     pkgs.ripgrep
