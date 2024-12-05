@@ -31,6 +31,8 @@
     pkgs.poetry
     pkgs.pre-commit
     pkgs.virtualenv
+    pkgs.parallel
+    pkgs.yq
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
