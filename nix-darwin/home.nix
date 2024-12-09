@@ -33,6 +33,9 @@
     pkgs.virtualenv
     pkgs.parallel
     pkgs.yq
+    pkgs.docker-credential-helpers
+    pkgs.docker
+    pkgs.docker-buildx
     pkgs.kustomize
     # LANGUAGES
     pkgs.nodejs_22
