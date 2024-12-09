@@ -33,6 +33,7 @@
     pkgs.virtualenv
     pkgs.parallel
     pkgs.yq
+    pkgs.kustomize
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
