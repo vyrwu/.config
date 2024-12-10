@@ -18,6 +18,7 @@ make update
 
 ## TODO
 
+- Load arbitrary programs into shell
 - Improve fs navigation inside terminal
 - Followup on managing WezTerm using Nix
 - Switch between dark/light mode via keybinding
@@ -30,4 +31,5 @@ make update
 - Check in my Oryx keyboard layout to Version Control
 - Improve multi-machine Nix config management
 - Manage dotfiles with Nix, not git repo
-- Manage secrets and SSH keys with Nix // Inspiration: https://github.com/Baitinq/nixos-config
+- Manage secrets and SSH keys with Nix // Inspiration:
+  https://github.com/Baitinq/nixos-config
