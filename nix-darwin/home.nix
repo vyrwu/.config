@@ -37,6 +37,7 @@
     pkgs.docker
     pkgs.docker-buildx
     pkgs.kustomize
+    pkgs.eks-node-viewer
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
