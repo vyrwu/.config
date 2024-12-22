@@ -32,7 +32,7 @@
     pkgs.pre-commit
     pkgs.virtualenv
     pkgs.parallel
-    pkgs.yq
+    pkgs.yq-go
     pkgs.docker-credential-helpers
     pkgs.docker
     pkgs.docker-buildx
