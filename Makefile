@@ -1,5 +1,7 @@
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
+all: update check switch
+
 install:
 	nix run nix-darwin -- switch --flake "${ROOT_DIR}nix-darwin"
 
