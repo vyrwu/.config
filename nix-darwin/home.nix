@@ -39,6 +39,7 @@
     pkgs.kustomize
     pkgs.eks-node-viewer
     pkgs.copier
+    pkgs.aerospace
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
