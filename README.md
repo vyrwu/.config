@@ -6,16 +6,6 @@ Collection of all my MacOS/Linux configuration files.
 
 Requires a working [Nix](https://nixos.org/download/) installation.
 
-```bash
-make install
-```
-
-## Applying changes
-
-```bash
-make update
-```
-
 ## TODO
 
 - Load arbitrary programs into shell
@@ -29,7 +19,5 @@ make update
 - Install Nix flake directly from GitHub
 - Review oh my zsh plugins
 - Check in my Oryx keyboard layout to Version Control
-- Improve multi-machine Nix config management
-- Manage dotfiles with Nix, not git repo
 - Manage secrets and SSH keys with Nix // Inspiration:
   https://github.com/Baitinq/nixos-config

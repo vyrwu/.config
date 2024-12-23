@@ -1,5 +1,5 @@
 {
-  description = "Example Darwin system flake";
+  description = "My nix-darwin config";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -42,9 +42,8 @@
             pkgs.zsh
           ];
 
-          fonts.packages = [ pkgs.nerdfonts ];
+          fonts.packages = [ pkgs.nerd-fonts.fira-code ];
 
-          nix.settings.auto-optimise-store = true;
           nix.optimise.automatic = true;
           nix.configureBuildUsers = true;
 
