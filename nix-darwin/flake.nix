@@ -60,6 +60,7 @@
           system.defaults.finder.CreateDesktop = false;
           system.defaults.finder.ShowPathbar = true;
           system.defaults.finder.ShowStatusBar = true;
+          system.keyboard.enableKeyMapping = true;
           system.keyboard.remapCapsLockToControl = true;
           # TODO: the following option is broken:
           # system.defaults.universalaccess.reduceMotion = 1;
