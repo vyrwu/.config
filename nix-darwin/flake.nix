@@ -54,12 +54,18 @@
           system.defaults.NSGlobalDomain.KeyRepeat = 2;
           system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
           system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 3.0;
+
           system.defaults.dock.autohide = true;
           system.defaults.dock.expose-animation-duration = 1.0;
           system.defaults.dock.orientation = "left";
+          system.defaults.dock.expose-group-apps = true;
+
+          system.defaults.spaces.spans-displays = true;
+
           system.defaults.finder.CreateDesktop = false;
           system.defaults.finder.ShowPathbar = true;
           system.defaults.finder.ShowStatusBar = true;
+
           system.keyboard.enableKeyMapping = true;
           system.keyboard.remapCapsLockToControl = true;
           # TODO: the following option is broken:
@@ -73,6 +79,7 @@
           homebrew.enable = true;
           homebrew.casks = [
             "wezterm"
+            "nikitabobko/tap/aerospace"
           ];
         };
     in

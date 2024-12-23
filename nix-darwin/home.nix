@@ -40,6 +40,7 @@
     pkgs.eks-node-viewer
     pkgs.copier
     pkgs.aerospace
+    pkgs.jankyborders
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
