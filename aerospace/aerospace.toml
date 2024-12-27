@@ -25,6 +25,9 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Disable macOS feature that hides apps with cmd+h
 automatically-unhide-macos-hidden-apps = true
 
+[exec.env-vars]
+PATH = '/etc/profiles/per-user/aleksandernowak/bin:${PATH}'
+
 [key-mapping]
 preset = 'qwerty'
 
@@ -62,10 +65,10 @@ alt-shift-3 = 'move-node-to-workspace 3'
 alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
-alt-b = 'exec-and-forget open -na "Google Chrome" --args --new-window "https://google.com"' # Browser
-alt-t = 'exec-and-forget open -na "WezTerm"' # Terminal
-alt-c = 'exec-and-forget open -na "Slack"' # Chat
-alt-d = 'exec-and-forget open -a "Notion"' # Docs
+alt-cmd-b = 'exec-and-forget open -na "Google Chrome" --args --new-window "https://google.com"' # Browser
+alt-cmd-t = 'exec-and-forget open -na "WezTerm"' # Terminal
+alt-cmd-c = 'exec-and-forget open -na "Slack"' # Chat
+alt-cmd-d = 'exec-and-forget open -a "Notion"' # Docs
 
 alt-f = 'fullscreen'
 
