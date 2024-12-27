@@ -64,11 +64,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- NOTE REGARDING LAZY LOADING OF PLUGINS
+-- the init property runs before the plugin is lazy loaded
+-- the config property runs when the plugin gets loaded
+-- if the plugin does not explicitly define lazy loading, it is always loaded
 require("lazy").setup({
   { "tpope/vim-sensible", lazy = false },
   {
     "nvim-telescope/telescope.nvim",
-    commit = "057ee0f8783872635bc9bc9249a4448da9f99123",
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -92,59 +95,71 @@ require("lazy").setup({
         ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
         { noremap = true }
       )
+    end,
+    config = function()
+      local fb_actions = require("telescope._extensions.file_browser.actions")
+      require("telescope").setup({
+        defaults = {
+          layout_strategy = "vertical",
+          layout_config = {
+            vertical = {
+              height = 0.95,
+              width = 0.95,
+              preview_height = 0.6,
+            },
+          },
+          wrap_results = true,
+          vimgrep_arguments = {
+            "rg",
+            "-L",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+          },
+          file_ignore_patterns = {
+            "vendor/",
+            "node_modules/",
+            ".git/",
+          },
+          prompt_prefix = "   ",
+          -- file_sorter = require("telescope.sorters").get_fuzzy_file,
+          -- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+          borderchars = {
+            "─",
+            "│",
+            "─",
+            "│",
+            "╭",
+            "╮",
+            "╯",
+            "╰",
+          },
+          set_env = { ["COLORTERM"] = "truecolor" },
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+          file_browser = {
+            hidden = true,
+            hijack_netrw = true,
+          },
+        },
+      })
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("file_browser")
     end,
-    opts = {
-      defaults = {
-        layout_strategy = "vertical",
-        layout_config = {
-          vertical = {
-            height = 0.95,
-            width = 0.95,
-            preview_height = 0.6,
-          },
-        },
-        wrap_results = true,
-        vimgrep_arguments = {
-          "rg",
-          "-L",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--hidden",
-        },
-        file_ignore_patterns = {
-          "vendor/",
-          "node_modules/",
-          ".git/",
-        },
-        prompt_prefix = "   ",
-        -- file_sorter = require("telescope.sorters").get_fuzzy_file,
-        -- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-        set_env = { ["COLORTERM"] = "truecolor" },
-      },
-      extensions_list = { "fzf" },
-      extensions = {
-        fzf = {
-          fuzzy = true,
-          override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = "smart_case",
-        },
-        file_browser = {
-          hidden = true,
-        },
-      },
-    },
   },
   {
     "numToStr/Comment.nvim",
-    init = function()
+    config = function()
       vim.keymap.set("n", "<leader>/", function()
         require("Comment.api").toggle.linewise()
       end, {})
