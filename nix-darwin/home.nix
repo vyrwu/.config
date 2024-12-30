@@ -41,6 +41,7 @@
     pkgs.copier
     pkgs.aerospace
     pkgs.jankyborders
+    pkgs.bun
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
