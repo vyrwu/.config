@@ -453,4 +453,10 @@ require("lazy").setup({
     opts = {},
   },
   { "nvim-treesitter/nvim-treesitter-context" },
+  {
+    "lervag/vimtex",
+    init = function()
+      vim.g.vimtex_view_method = "zathura"
+    end,
+  },
 })
