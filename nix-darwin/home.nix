@@ -43,6 +43,7 @@
     pkgs.jankyborders
     pkgs.bun
     pkgs.texliveFull
+    pkgs.gimp
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
