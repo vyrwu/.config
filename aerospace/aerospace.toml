@@ -72,8 +72,6 @@ alt-cmd-d = 'exec-and-forget open -a "Notion"' # Docs
 
 alt-f = 'fullscreen'
 
-alt-w = 'close'
-
 alt-shift-semicolon = 'mode service'
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
