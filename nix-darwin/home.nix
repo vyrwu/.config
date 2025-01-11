@@ -44,6 +44,7 @@
     pkgs.bun
     pkgs.texliveFull
     pkgs.gimp
+    pkgs.air
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
