@@ -62,6 +62,7 @@
     pkgs.nodePackages.typescript-language-server
     pkgs.nil
     pkgs.pyright
+    pkgs.templ
     # LINTERS
     pkgs.textlint
     pkgs.textlint-rule-write-good
