@@ -195,6 +195,7 @@ require("lazy").setup({
           "bash",
           "regex",
           "nix",
+          "just",
         },
         sync_install = false,
         highlight = { enable = true },

@@ -42,9 +42,10 @@
     pkgs.aerospace
     pkgs.jankyborders
     pkgs.bun
-    pkgs.texliveFull
+    # pkgs.texliveFull
     pkgs.gimp
     pkgs.air
+    pkgs.just
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
