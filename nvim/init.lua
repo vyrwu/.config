@@ -50,6 +50,10 @@ vim.opt.listchars = {
   nbsp = "␣",
 }
 
+-- set global status line (recommended for avante.nvim)
+-- Ref: https://github.com/yetone/avante.nvim/blob/2ead26f809dd9804678de3dd18fa65ab3fadce29/README.md?plain=1#L201
+vim.opt.laststatus = 3
+
 -- setup lazyvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -468,5 +472,42 @@ require("lazy").setup({
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
+  },
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = "*",
+    build = "make",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      {
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+          },
+        },
+      },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+    opts = {
+      windows = {
+        width = 40,
+      },
+    },
   },
 })
