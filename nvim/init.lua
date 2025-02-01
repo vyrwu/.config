@@ -200,6 +200,8 @@ require("lazy").setup({
           "regex",
           "nix",
           "just",
+          "html",
+          "templ",
         },
         sync_install = false,
         highlight = { enable = true },
@@ -244,6 +246,7 @@ require("lazy").setup({
           ["terraform-vars"] = { "terraform_fmt" },
           bash = { "shfmt" },
           nix = { "nixfmt" },
+          templ = { "templ" },
           ["*"] = { "codespell" },
           ["_"] = { "trim_whitespace" },
         },
@@ -361,6 +364,10 @@ require("lazy").setup({
         "ts_ls",
         "pyright",
         "nil_ls",
+        "htmx",
+        "tailwindcss",
+        "html",
+        "templ",
       }
 
       for _, v in pairs(lsps) do

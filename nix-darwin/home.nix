@@ -42,6 +42,7 @@
     pkgs.aerospace
     pkgs.jankyborders
     pkgs.bun
+    pkgs.tailwindcss
     # pkgs.texliveFull
     pkgs.gimp
     pkgs.air
@@ -64,6 +65,8 @@
     pkgs.nil
     pkgs.pyright
     pkgs.templ
+    pkgs.htmx-lsp
+    pkgs.tailwindcss-language-server
     # LINTERS
     pkgs.textlint
     pkgs.textlint-rule-write-good
