@@ -212,15 +212,6 @@ require("lazy").setup({
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    init = function()
-      vim.keymap.set({ "n", "v" }, "<leader>fmt", function()
-        require("conform").format({
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 500,
-        })
-      end, {})
-    end,
     config = function()
       local conform = require("conform").setup({
         -- Nvim Filetypes:
@@ -247,13 +238,21 @@ require("lazy").setup({
           bash = { "shfmt" },
           nix = { "nixfmt" },
           templ = { "templ" },
-          ["*"] = { "codespell" },
+          ["*"] = function(bufnr)
+            local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+            -- Disable formatting on Templ-generated files
+            if bufname:match("_templ") then
+              return
+            else
+              return { "codespell" }
+            end
+          end,
           ["_"] = { "trim_whitespace" },
         },
         format_on_save = {
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 2000,
+          timeout_ms = 5000,
+          lsp_format = "fallback",
         },
       })
     end,
