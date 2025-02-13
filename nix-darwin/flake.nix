@@ -42,7 +42,10 @@
             pkgs.zsh
           ];
 
-          fonts.packages = [ pkgs.nerd-fonts.fira-code ];
+          fonts.packages = [
+            pkgs.nerd-fonts.fira-code
+            pkgs.hack-font
+          ];
 
           nix.optimise.automatic = true;
           nix.configureBuildUsers = true;
