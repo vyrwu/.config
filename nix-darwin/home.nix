@@ -43,6 +43,7 @@
     pkgs.jankyborders
     pkgs.bun
     pkgs.tailwindcss
+    pkgs.govulncheck
     # pkgs.texliveFull
     pkgs.gimp
     pkgs.air
