@@ -48,6 +48,7 @@
     pkgs.gimp
     pkgs.air
     pkgs.just
+    pkgs.kind
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
