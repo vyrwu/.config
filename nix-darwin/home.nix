@@ -44,6 +44,7 @@
     pkgs.bun
     pkgs.tailwindcss
     pkgs.govulncheck
+    pkgs.go-mockery
     # pkgs.texliveFull
     pkgs.gimp
     pkgs.air

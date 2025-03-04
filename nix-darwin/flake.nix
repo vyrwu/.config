@@ -73,7 +73,7 @@
           # system.defaults.universalaccess.reduceMotion = 1;
           # system.defaults.universalaccess.reduceTransparency = true;
 
-          security.pam.enableSudoTouchIdAuth = true;
+          security.pam.services.sudo_local.touchIdAuth = true;
 
           home-manager.backupFileExtension = "backup";
 
