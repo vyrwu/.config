@@ -28,6 +28,16 @@ vim.keymap.set("v", "<", "<gv", { noremap = true })
 -- dismiss search highlights
 vim.keymap.set("n", "<C-c>", "<cmd> noh <CR>", {})
 
+-- base64 encode selected text
+vim.keymap.set("v", "<leader>64", "c<c-r>=system('base64', @\")<cr><esc>")
+
+-- base64 decode selected text
+vim.keymap.set(
+  "v",
+  "<leader>d64",
+  "c<c-r>=system('base64 --decode', @\")<cr><esc>"
+)
+
 -- save buffer on :W as well as :w
 vim.api.nvim_create_user_command(
   "W",
