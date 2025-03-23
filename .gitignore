@@ -1,4 +1,4 @@
-**/
+*/
 !.gitignore
 !.gitmodules
 !README.md
@@ -10,5 +10,7 @@
 !/git
 !/bin
 !/nix
-!/nix-darwin
+!/nix/modules
+!/nix/modules/hosts
+!/nix/modules/home-manager
 !/aerospace
