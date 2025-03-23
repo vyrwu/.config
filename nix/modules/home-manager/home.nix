@@ -1,0 +1,83 @@
+{ pkgs, ... }:
+{
+  home.packages = [
+    pkgs.nix-search-cli
+    pkgs.git
+    pkgs.neovim
+    pkgs.ripgrep
+    pkgs.lazygit
+    pkgs.tmux
+    pkgs.wget
+    pkgs.kubectl
+    pkgs.istioctl
+    pkgs.gh
+    pkgs.k9s
+    pkgs.kubernetes-helm
+    pkgs.helmfile
+    pkgs.colima
+    pkgs.aws-vault
+    pkgs.poetry
+    pkgs.pre-commit
+    pkgs.virtualenv
+    pkgs.parallel
+    pkgs.yq-go
+    pkgs.docker-credential-helpers
+    pkgs.docker
+    pkgs.docker-buildx
+    pkgs.kustomize
+    pkgs.eks-node-viewer
+    pkgs.copier
+    pkgs.aerospace
+    pkgs.jankyborders
+    pkgs.bun
+    pkgs.tailwindcss
+    pkgs.govulncheck
+    pkgs.go-mockery
+    # pkgs.texliveFull
+    pkgs.gimp
+    pkgs.air
+    pkgs.just
+    pkgs.kind
+    # LANGUAGES
+    pkgs.nodejs_22
+    pkgs.go
+    pkgs.terraform
+    pkgs.python312
+    pkgs.python312Packages.pip
+    # LANGUAGE SERVERS
+    pkgs.helm-ls
+    pkgs.vscode-langservers-extracted
+    pkgs.lua-language-server
+    pkgs.gopls
+    pkgs.terraform-ls
+    pkgs.yaml-language-server
+    pkgs.bash-language-server
+    pkgs.nodePackages.typescript-language-server
+    pkgs.nil
+    pkgs.pyright
+    pkgs.templ
+    pkgs.htmx-lsp
+    pkgs.tailwindcss-language-server
+    # LINTERS
+    pkgs.textlint
+    pkgs.textlint-rule-write-good
+    pkgs.textlint-rule-common-misspellings
+    pkgs.tflint
+    pkgs.golangci-lint
+    pkgs.yamllint
+    pkgs.eslint_d
+    pkgs.actionlint
+    pkgs.mypy
+    # FORMATTERS
+    pkgs.nixfmt-rfc-style
+    pkgs.stylua
+    pkgs.black
+    pkgs.codespell
+    pkgs.gofumpt
+    pkgs.goimports-reviser
+    pkgs.golines
+    pkgs.shfmt
+    pkgs.prettierd
+    pkgs.isort
+  ];
+}
