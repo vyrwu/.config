@@ -238,6 +238,7 @@ require("lazy").setup({
           markdown = { "prettierd" },
           lua = { "stylua" },
           python = { "black" },
+          xml = { "xmlformat" },
           go = {
             "gofumpt",
             "golines",

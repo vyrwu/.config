@@ -38,6 +38,7 @@
     pkgs.air
     pkgs.just
     pkgs.kind
+    pkgs.xmlformat
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
