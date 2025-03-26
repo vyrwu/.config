@@ -40,6 +40,7 @@
     pkgs.kind
     pkgs.xmlformat
     pkgs.eksctl
+    pkgs.go-swag
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
