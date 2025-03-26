@@ -39,7 +39,7 @@
     pkgs.just
     pkgs.kind
     pkgs.xmlformat
-    pkgs.pkgs.eksctl
+    pkgs.eksctl
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
