@@ -41,6 +41,7 @@
     pkgs.xmlformat
     pkgs.eksctl
     pkgs.go-swag
+    pkgs.compile-daemon
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
