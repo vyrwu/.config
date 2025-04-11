@@ -42,6 +42,7 @@
     pkgs.eksctl
     pkgs.go-swag
     pkgs.compile-daemon
+    pkgs.kubebuilder
     # LANGUAGES
     pkgs.nodejs_22
     pkgs.go
