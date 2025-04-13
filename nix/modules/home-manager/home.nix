@@ -1,88 +1,132 @@
 { pkgs, ... }:
+let
+  packages = {
+    desktop = [
+      pkgs.aerospace
+      pkgs.jankyborders
+      pkgs.gimp
+    ];
+
+    cli = [
+      pkgs.neovim
+      pkgs.ripgrep
+      pkgs.tmux
+      pkgs.wget
+      pkgs.parallel
+      pkgs.just
+      pkgs.aws-vault
+      pkgs.pre-commit
+      pkgs.copier
+      # pkgs.texliveFull
+      pkgs.textlint
+      pkgs.textlint-rule-write-good
+      pkgs.textlint-rule-common-misspellings
+      pkgs.xmlformat
+      pkgs.codespell
+    ];
+
+    docker = [
+      pkgs.colima
+      pkgs.docker-credential-helpers
+      pkgs.docker
+      pkgs.docker-buildx
+    ];
+
+    kubernetes = [
+      pkgs.kubebuilder
+      pkgs.kubectl
+      pkgs.istioctl
+      pkgs.k9s
+      pkgs.kubernetes-helm
+      pkgs.helm-ls
+      pkgs.helmfile
+      pkgs.kustomize
+      pkgs.eks-node-viewer
+      pkgs.kind
+      pkgs.eksctl
+    ];
+
+    go = [
+      pkgs.go
+      pkgs.gopls
+      pkgs.air
+      pkgs.go-swag
+      pkgs.compile-daemon
+      pkgs.govulncheck
+      pkgs.go-mockery
+      pkgs.golangci-lint
+      pkgs.gofumpt
+      pkgs.goimports-reviser
+      pkgs.golines
+      pkgs.templ
+      pkgs.htmx-lsp
+    ];
+
+    python = [
+      pkgs.python312
+      pkgs.python312Packages.pip
+      pkgs.virtualenv
+      pkgs.poetry
+      pkgs.pyright
+      pkgs.mypy
+      pkgs.black
+      pkgs.isort
+    ];
+
+    js = [
+      pkgs.nodejs_22
+      pkgs.bun
+      pkgs.vscode-langservers-extracted
+      pkgs.nodePackages.typescript-language-server
+      pkgs.eslint_d
+      pkgs.prettierd
+    ];
+
+    nix = [
+      pkgs.nix-search-cli
+      pkgs.nil
+      pkgs.nixfmt-rfc-style
+    ];
+
+    tailwindcss = [
+      pkgs.tailwindcss
+      pkgs.tailwindcss-language-server
+    ];
+
+    terraform = [
+      pkgs.terraform
+      pkgs.terraform-ls
+      pkgs.tflint
+    ];
+
+    lua = [
+      pkgs.lua-language-server
+      pkgs.stylua
+    ];
+
+    bash = [
+      pkgs.bash-language-server
+      pkgs.shfmt
+    ];
+
+    yaml = [
+      pkgs.yq-go
+      pkgs.yaml-language-server
+      pkgs.yamllint
+      pkgs.actionlint # GitHub Actions only
+    ];
+
+    git = [
+      pkgs.git
+      pkgs.lazygit
+      pkgs.gh # GtiHub only
+    ];
+  };
+
+  flattenPackages = builtins.foldl' (acc: kind: acc ++ packages.${kind}) [ ] (
+    builtins.attrNames packages
+  );
+in
 {
-  home.packages = [
-    pkgs.nix-search-cli
-    pkgs.git
-    pkgs.neovim
-    pkgs.ripgrep
-    pkgs.lazygit
-    pkgs.tmux
-    pkgs.wget
-    pkgs.kubectl
-    pkgs.istioctl
-    pkgs.gh
-    pkgs.k9s
-    pkgs.kubernetes-helm
-    pkgs.helmfile
-    pkgs.colima
-    pkgs.aws-vault
-    pkgs.poetry
-    pkgs.pre-commit
-    pkgs.virtualenv
-    pkgs.parallel
-    pkgs.yq-go
-    pkgs.docker-credential-helpers
-    pkgs.docker
-    pkgs.docker-buildx
-    pkgs.kustomize
-    pkgs.eks-node-viewer
-    pkgs.copier
-    pkgs.aerospace
-    pkgs.jankyborders
-    pkgs.bun
-    pkgs.tailwindcss
-    pkgs.govulncheck
-    pkgs.go-mockery
-    # pkgs.texliveFull
-    pkgs.gimp
-    pkgs.air
-    pkgs.just
-    pkgs.kind
-    pkgs.xmlformat
-    pkgs.eksctl
-    pkgs.go-swag
-    pkgs.compile-daemon
-    pkgs.kubebuilder
-    # LANGUAGES
-    pkgs.nodejs_22
-    pkgs.go
-    pkgs.terraform
-    pkgs.python312
-    pkgs.python312Packages.pip
-    # LANGUAGE SERVERS
-    pkgs.helm-ls
-    pkgs.vscode-langservers-extracted
-    pkgs.lua-language-server
-    pkgs.gopls
-    pkgs.terraform-ls
-    pkgs.yaml-language-server
-    pkgs.bash-language-server
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nil
-    pkgs.pyright
-    pkgs.templ
-    pkgs.htmx-lsp
-    pkgs.tailwindcss-language-server
-    # LINTERS
-    pkgs.textlint
-    pkgs.textlint-rule-write-good
-    pkgs.textlint-rule-common-misspellings
-    pkgs.tflint
-    pkgs.golangci-lint
-    pkgs.yamllint
-    pkgs.eslint_d
-    pkgs.actionlint
-    pkgs.mypy
-    # FORMATTERS
-    pkgs.nixfmt-rfc-style
-    pkgs.stylua
-    pkgs.black
-    pkgs.codespell
-    pkgs.gofumpt
-    pkgs.goimports-reviser
-    pkgs.golines
-    pkgs.shfmt
-    pkgs.prettierd
-    pkgs.isort
-  ];
+  home.packages = flattenPackages;
 }
