@@ -5,6 +5,7 @@ let
       pkgs.aerospace
       pkgs.jankyborders
       pkgs.gimp
+      pkgs.slack
     ];
 
     cli = [
