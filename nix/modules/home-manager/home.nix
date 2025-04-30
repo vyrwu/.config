@@ -123,6 +123,12 @@ let
       pkgs.lazygit
       pkgs.gh # GtiHub only
     ];
+
+    csharp = [
+      pkgs.dotnet-sdk_9
+      pkgs.csharpier
+      pkgs.omnisharp-roslyn
+    ];
   };
 
   flattenPackages = builtins.foldl' (acc: kind: acc ++ packages.${kind}) [ ] (

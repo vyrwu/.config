@@ -26,6 +26,7 @@
     export EDITOR="nvim"
     # ENVIRONMENT VARIABLES
     export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json"
+    export XMLFORMAT_CONF="$HOME/.config/.xmlformat.conf"
 
     # TODO: store the key in an encrypted form.
     # Inspiration: https://github.com/ryantm/agenix

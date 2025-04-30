@@ -212,6 +212,7 @@ require("lazy").setup({
           "just",
           "html",
           "templ",
+          "c_sharp",
         },
         sync_install = false,
         highlight = { enable = true },
@@ -249,6 +250,7 @@ require("lazy").setup({
           bash = { "shfmt" },
           nix = { "nixfmt" },
           templ = { "templ" },
+          cs = { "csharpier" },
           ["*"] = function(bufnr)
             local bufname = vim.api.nvim_buf_get_name(bufnr)
 
@@ -378,6 +380,7 @@ require("lazy").setup({
         "tailwindcss",
         "html",
         "templ",
+        "omnisharp",
       }
 
       for _, v in pairs(lsps) do
@@ -423,6 +426,15 @@ require("lazy").setup({
             on_attach = on_attach,
             capabilities = capabilities,
             filetypes = { "python" },
+          })
+          goto continue
+        end
+
+        if v == "omnisharp" then
+          lspconfig[v].setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            cmd = { "omnisharp" },
           })
           goto continue
         end
