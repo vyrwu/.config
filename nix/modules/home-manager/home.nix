@@ -61,6 +61,7 @@ let
       pkgs.golines
       pkgs.templ
       pkgs.htmx-lsp
+      pkgs.gotools
     ];
 
     python = [
