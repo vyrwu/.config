@@ -116,13 +116,17 @@ let
       pkgs.yq-go
       pkgs.yaml-language-server
       pkgs.yamllint
-      pkgs.actionlint # GitHub Actions only
     ];
 
     git = [
       pkgs.git
       pkgs.lazygit
-      pkgs.gh # GtiHub only
+    ];
+
+    github = [
+      pkgs.act
+      pkgs.actionlint
+      pkgs.gh
     ];
 
     csharp = [
