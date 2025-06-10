@@ -53,4 +53,6 @@
     name = "${username}";
     home = "/Users/${username}";
   };
+
+  system.primaryUser = "${username}";
 }
