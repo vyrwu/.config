@@ -62,6 +62,7 @@ let
       pkgs.templ
       pkgs.htmx-lsp
       pkgs.gotools
+      pkgs.delve
     ];
 
     python = [
