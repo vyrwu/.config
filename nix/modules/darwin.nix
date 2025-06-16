@@ -26,12 +26,12 @@
     pkgs.hack-font
   ];
 
-  system.defaults.NSGlobalDomain.KeyRepeat = 2;
+  system.defaults.NSGlobalDomain.KeyRepeat = 3;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
   system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 3.0;
+  system.defaults.NSGlobalDomain._HIHideMenuBar = false;
 
   system.defaults.dock.autohide = true;
-  system.defaults.dock.expose-animation-duration = 1.0;
   system.defaults.dock.orientation = "left";
   system.defaults.dock.expose-group-apps = true;
 
@@ -40,12 +40,13 @@
   system.defaults.finder.CreateDesktop = false;
   system.defaults.finder.ShowPathbar = true;
   system.defaults.finder.ShowStatusBar = true;
+  system.defaults.finder._FXShowPosixPathInTitle = true;
+  system.defaults.finder._FXSortFoldersFirst = true;
+
+  system.defaults.loginwindow.autoLoginUser = "${username}";
 
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;
-  # TODO: the following option is broken:
-  # system.defaults.universalaccess.reduceMotion = 1;
-  # system.defaults.universalaccess.reduceTransparency = true;
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
