@@ -24,6 +24,7 @@ let
       pkgs.textlint-rule-common-misspellings
       pkgs.xmlformat
       pkgs.codespell
+      pkgs.openapi-generator-cli
     ];
 
     docker = [
