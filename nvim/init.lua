@@ -238,7 +238,7 @@ require("lazy").setup({
           yaml = { "prettierd" },
           markdown = { "prettierd" },
           lua = { "stylua" },
-          python = { "black" },
+          python = { "ruff_fix", "ruff_format", "ruff_optimize_imports" },
           xml = { "xmlformat" },
           go = {
             "gofumpt",

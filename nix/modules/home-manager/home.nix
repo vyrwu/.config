@@ -67,14 +67,14 @@ let
     ];
 
     python = [
-      pkgs.python312
-      pkgs.python312Packages.pip
+      pkgs.python313
+      pkgs.python313Packages.pip
       pkgs.virtualenv
       pkgs.poetry
       pkgs.pyright
       pkgs.mypy
-      pkgs.black
-      pkgs.isort
+      pkgs.rye
+      pkgs.ruff
     ];
 
     js = [
