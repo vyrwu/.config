@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   programs.zsh.enable = true;
   programs.zsh.shellAliases = {
@@ -14,23 +14,22 @@
     ghpr = "gh pr create --fill";
   };
   programs.zsh.initExtra = ''
-    # SYSTEM PATH
-    # Disables builtin Python.
+    ### PATH
+    # Disables builtin Python in favour of Nix-managed one.
     export PATH=$(echo $PATH | sed -r 's|/Library/Frameworks/Python.framework/Versions/3.11/bin:||')
     export PATH=$(echo $PATH | sed -r 's|/Library/Frameworks/Python.framework/Versions/3.10/bin:||')
-    # FIXME: Prioritise Nix binaries over Homebrew, until it is removed all together.
+    # Prioritise Nix binaries over Homebrew, until it is removed all together.
     export PATH=$(echo $PATH | sed -r "s|(/opt/homebrew/bin)(:)(.*)|\3\2\1|")
     export PATH=$(echo $PATH | sed -r "s|(/opt/homebrew/sbin)(:)(.*)|\3\2\1|")
     export PATH="$PATH:$HOME/.config/scripts"
 
-    export EDITOR="nvim"
-    # ENVIRONMENT VARIABLES
-    export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json"
-    export XMLFORMAT_CONF="$HOME/.config/.xmlformat.conf"
+    ### SHELL VARIABLES
+    export EDITOR="nvim";
+    export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json";
+    export XMLFORMAT_CONF="$HOME/.config/.xmlformat.conf";
+    export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt";
+    export AVANTE_ANTHROPIC_API_KEY="$(cat ${config.sops.secrets.avante_anthropic_api_key.path})";
 
-    # TODO: store the key in an encrypted form.
-    # Inspiration: https://github.com/ryantm/agenix
-    export ANTHROPIC_API_KEY="unset"
   '';
   programs.zsh.autosuggestion.enable = true;
 
