@@ -10,7 +10,5 @@
 !/git
 !/bin
 !/nix
-!/nix/modules
-!/nix/modules/hosts
-!/nix/modules/home-manager
+!/nix/*
 !/aerospace
