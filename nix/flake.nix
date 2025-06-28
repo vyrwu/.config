@@ -3,11 +3,23 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     systems.url = "github:nix-systems/default-darwin";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -17,6 +29,7 @@
       nixpkgs,
       home-manager,
       systems,
+      sops-nix,
     }@inputs:
     let
       inherit (self) outputs;
@@ -29,6 +42,14 @@
           config.allowUnfree = true;
         }
       );
+
+      sharedModules = [
+        ./modules/nix.nix
+        ./modules/darwin.nix
+        ./modules/homebrew.nix
+        inputs.home-manager.darwinModules.home-manager
+        ./modules/home-manager
+      ];
     in
     {
       inherit lib;
@@ -38,13 +59,8 @@
         "Aleksanders-MacBook" = lib.darwinSystem {
           pkgs = pkgsFor.aarch64-darwin;
           modules = [
-            ./modules/nix.nix
-            ./modules/darwin.nix
-            ./modules/homebrew.nix
             ./modules/hosts/macbook-zn.nix
-            home-manager.darwinModules.home-manager
-            ./modules/home-manager
-          ];
+          ] ++ sharedModules;
           specialArgs = {
             inherit self inputs outputs;
             # FIXME: This should rather be computed based on hostnames.
@@ -54,13 +70,8 @@
         "Aleks-MacBook-Pro" = lib.darwinSystem {
           pkgs = pkgsFor.x86_64-darwin;
           modules = [
-            ./modules/nix.nix
-            ./modules/darwin.nix
-            ./modules/homebrew.nix
             ./modules/hosts/macbook-personal.nix
-            home-manager.darwinModules.home-manager
-            ./modules/home-manager
-          ];
+          ] ++ sharedModules;
           specialArgs = {
             inherit self inputs outputs;
             # FIXME: This should rather be computed based on hostnames.

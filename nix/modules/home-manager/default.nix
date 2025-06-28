@@ -1,6 +1,7 @@
 {
   username,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -19,6 +20,7 @@
     imports = [
       (import ./home.nix { inherit pkgs; })
       ./programs.nix
+      (import ./sops { inherit inputs username; })
     ];
   };
 }

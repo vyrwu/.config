@@ -11,4 +11,7 @@
 !/bin
 !/nix
 !/nix/*
+!/nix/modules
+!/nix/modules/*
+!/nix/modules/home-manager/*
 !/aerospace

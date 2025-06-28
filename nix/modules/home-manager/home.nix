@@ -26,6 +26,8 @@ let
       pkgs.codespell
       pkgs.openapi-generator-cli
       pkgs.redis
+      pkgs.age
+      pkgs.sops
     ];
 
     docker = [
