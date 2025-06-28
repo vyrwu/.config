@@ -242,7 +242,7 @@ require("lazy").setup({
           xml = { "xmlformat" },
           go = {
             "gofumpt",
-            "golines",
+            -- "golines",
             "goimports_reviser",
           },
           terraform = { "terraform_fmt" },
@@ -257,9 +257,10 @@ require("lazy").setup({
             -- Disable formatting on Templ-generated files
             if bufname:match("_templ") then
               return
-            else
-              return { "codespell" }
+              -- else
+              --   return { "codespell" }
             end
+            return {}
           end,
           ["_"] = { "trim_whitespace" },
         },
@@ -537,9 +538,104 @@ require("lazy").setup({
       },
     },
     opts = {
+      provider = "gemini",
       windows = {
         width = 40,
       },
     },
+  },
+  {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    keys = {
+      {
+        "<leader>db",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+      },
+      {
+        "<leader>dc",
+        function()
+          require("dap").continue()
+        end,
+      },
+      {
+        "<leader>dC",
+        function()
+          require("dap").run_to_cursor()
+        end,
+      },
+      {
+        "<leader>dT",
+        function()
+          require("dap").terminate()
+        end,
+      },
+      {
+        "<leader>dj",
+        function()
+          require("dap").step_into()
+        end,
+      },
+      {
+        "<leader>dl",
+        function()
+          require("dap").step_over()
+        end,
+      },
+      {
+        "<leader>dh",
+        function()
+          require("dap").step_back()
+        end,
+      },
+    },
+  },
+
+  {
+    "leoluz/nvim-dap-go",
+    config = true,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    keys = {
+      {
+        "<leader>dt",
+        function()
+          require("dap-go").debug_test()
+        end,
+        desc = "Debug test",
+      },
+    },
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    config = true,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    lazy = true,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+      "leoluz/nvim-dap-go",
+      "theHamsta/nvim-dap-virtual-text",
+    },
+    keys = {
+      {
+        "<leader>du",
+        function()
+          require("dapui").toggle({})
+        end,
+        desc = "Dap UI",
+      },
+    },
+    config = function(_, opts)
+      require("dapui").setup(opts)
+    end,
   },
 })
