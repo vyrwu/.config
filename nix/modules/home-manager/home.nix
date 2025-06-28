@@ -25,6 +25,7 @@ let
       pkgs.xmlformat
       pkgs.codespell
       pkgs.openapi-generator-cli
+      pkgs.redis
     ];
 
     docker = [
