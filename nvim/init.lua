@@ -538,7 +538,23 @@ require("lazy").setup({
       },
     },
     opts = {
+      mode = "legacy",
       provider = "gemini",
+      providers = {
+        gemini = {
+          model = "gemini-2.5-pro",
+          timeout = 20000,
+          disable_tools = true,
+          extra_request_body = {
+            generationConfig = {
+              temperature = 0.75,
+              -- thinkingConfig = {
+              --   thinking_budget = 0,
+              -- },
+            },
+          },
+        },
+      },
       windows = {
         width = 40,
       },
