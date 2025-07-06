@@ -9,7 +9,6 @@ Requires a working [Nix](https://nixos.org/download/) installation.
 ## TODO
 
 - Remove reliance on Brew in favour of Nix
-- Switch between dark/light mode via keybinding
 - Create keybindings for tree-sitter objects (functions/args/etc.)
 - Find a way to follow up on industry news (newsboat)
 - Automatically sync specific git repos (git-sync)

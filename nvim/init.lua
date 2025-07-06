@@ -1,5 +1,3 @@
-vim.lsp.set_log_level("off")
-
 -- set indentation
 vim.opt.expandtab = true
 vim.opt.smartindent = true
@@ -188,7 +186,17 @@ require("lazy").setup({
   {
     "EdenEast/nightfox.nvim",
     config = function()
-      vim.cmd("colorscheme nordfox")
+      dark = "nordfox"
+      light = "dayfox"
+      vim.cmd(string.format("colorscheme %s", dark))
+      -- colorcheme switch
+      vim.keymap.set("n", "<leader>cs", function()
+        if vim.g.colors_name == dark then
+          vim.cmd(string.format("colorscheme %s", light))
+          return
+        end
+        vim.cmd(string.format("colorscheme %s", dark))
+      end)
     end,
   },
   {
@@ -542,7 +550,7 @@ require("lazy").setup({
       provider = "gemini",
       providers = {
         gemini = {
-          model = "gemini-2.5-pro",
+          model = "gemini-2.5-flash",
           timeout = 20000,
           disable_tools = true,
           extra_request_body = {
@@ -554,9 +562,21 @@ require("lazy").setup({
             },
           },
         },
+        -- vendors = {
+        --   ["gemini/2.5-flash"] = {
+        --     __inherited_from = "gemini",
+        --     model = "gemini-2.5-flash",
+        --     display_name = "gemini/2.5-flash",
+        --   },
+        --   ["gemini/2.5-pro"] = {
+        --     __inherited_from = "gemini",
+        --     model = "gemini-2.5-pro",
+        --     display_name = "gemini/2.5-pro",
+        --   },
+        -- },
       },
       windows = {
-        width = 40,
+        width = 60,
       },
     },
   },
@@ -608,7 +628,6 @@ require("lazy").setup({
       },
     },
   },
-
   {
     "leoluz/nvim-dap-go",
     config = true,
