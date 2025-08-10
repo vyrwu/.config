@@ -36,6 +36,9 @@ vim.keymap.set(
   "c<c-r>=system('base64 --decode', @\")<cr><esc>"
 )
 
+-- hide cmdline by default
+vim.opt.cmdheight = 0
+
 -- save buffer on :W as well as :w
 vim.api.nvim_create_user_command(
   "W",
@@ -672,5 +675,25 @@ require("lazy").setup({
     config = function(_, opts)
       require("dapui").setup(opts)
     end,
+  },
+  {
+    "VonHeikemen/fine-cmdline.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    config = function()
+      require("fine-cmdline").setup({
+        cmdline = {
+          prompt = ":",
+        },
+        popup = {
+          position = {
+            row = "90%",
+            col = "50%",
+          },
+        },
+      })
+    end,
+    keys = {
+      { ":", "<cmd>FineCmdline<CR>", noremap = true },
+    },
   },
 })
