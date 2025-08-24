@@ -262,17 +262,6 @@ require("lazy").setup({
           nix = { "nixfmt" },
           templ = { "templ" },
           cs = { "csharpier" },
-          ["*"] = function(bufnr)
-            local bufname = vim.api.nvim_buf_get_name(bufnr)
-
-            -- Disable formatting on Templ-generated files
-            if bufname:match("_templ") then
-              return
-              -- else
-              --   return { "codespell" }
-            end
-            return {}
-          end,
           ["_"] = { "trim_whitespace" },
         },
         format_on_save = {
@@ -305,33 +294,6 @@ require("lazy").setup({
       -- omnisharp extended actions to fix go_to_definition
       -- ref: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
       { "Hoffs/omnisharp-extended-lsp.nvim", lazy = false },
-      -- completion
-      {
-        "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-        dependencies = {
-          "hrsh7th/cmp-cmdline",
-          "hrsh7th/cmp-nvim-lsp",
-          "hrsh7th/cmp-buffer",
-          "hrsh7th/cmp-path",
-        },
-        config = function()
-          local cmp = require("cmp")
-          cmp.setup({
-            mapping = cmp.mapping.preset.insert({
-              ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-              ["<C-d>"] = cmp.mapping.scroll_docs(4),
-              ["<C-c>"] = cmp.mapping.abort(),
-              ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-            }),
-            sources = cmp.config.sources({
-              { name = "nvim_lsp" },
-              { name = "vsnip" },
-              { name = "buffer" },
-            }),
-          })
-        end,
-      },
     },
     init = function()
       -- global LSP actions
@@ -520,13 +482,16 @@ require("lazy").setup({
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = false,
-    version = "*",
+    version = false,
     build = "make",
     dependencies = {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      "nvim-telescope/telescope.nvim",
+      "hrsh7th/nvim-cmp",
+      "folke/snacks.nvim",
+      "nvim-tree/nvim-web-devicons",
       {
         "HakonHarnes/img-clip.nvim",
         event = "VeryLazy",
@@ -554,32 +519,21 @@ require("lazy").setup({
       providers = {
         gemini = {
           model = "gemini-2.5-flash",
-          timeout = 20000,
+          timeout = 10000,
           disable_tools = true,
           extra_request_body = {
             generationConfig = {
               temperature = 0.75,
-              -- thinkingConfig = {
-              --   thinking_budget = 0,
-              -- },
             },
           },
         },
-        -- vendors = {
-        --   ["gemini/2.5-flash"] = {
-        --     __inherited_from = "gemini",
-        --     model = "gemini-2.5-flash",
-        --     display_name = "gemini/2.5-flash",
-        --   },
-        --   ["gemini/2.5-pro"] = {
-        --     __inherited_from = "gemini",
-        --     model = "gemini-2.5-pro",
-        --     display_name = "gemini/2.5-pro",
-        --   },
-        -- },
       },
       windows = {
-        width = 60,
+        wrap = true,
+        width = 100,
+        ask = {
+          start_insert = false,
+        },
       },
     },
   },
@@ -677,23 +631,49 @@ require("lazy").setup({
     end,
   },
   {
-    "VonHeikemen/fine-cmdline.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    config = function()
-      require("fine-cmdline").setup({
-        cmdline = {
-          prompt = ":",
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
         },
-        popup = {
-          position = {
-            row = "90%",
-            col = "50%",
-          },
-        },
-      })
-    end,
-    keys = {
-      { ":", "<cmd>FineCmdline<CR>", noremap = true },
+      },
+      -- you can enable a preset for easier configuration
+      presets = {
+        bottom_search = true, -- use a classic bottom cmdline for search
+        command_palette = true, -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false, -- add a border to hover docs and signature help
+      },
     },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+  },
+  {
+    "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+    version = "1.*",
+    opts = {
+      keymap = { preset = "default" },
+
+      appearance = {
+        nerd_font_variant = "mono",
+      },
+
+      completion = { documentation = { auto_show = true } },
+
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+    },
+    opts_extend = { "sources.default" },
   },
 })
