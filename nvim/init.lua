@@ -188,7 +188,16 @@ require("lazy").setup({
   },
   {
     "EdenEast/nightfox.nvim",
-    config = function()
+    opts = {
+      options = {
+        transparent = true,
+        styles = {
+          comments = "italic",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("nightfox").setup(opts)
       dark = "nordfox"
       light = "dayfox"
       vim.cmd(string.format("colorscheme %s", dark))

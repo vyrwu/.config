@@ -5,6 +5,7 @@ return {
   font_size = 16.0,
   color_scheme = "nordfox",
   enable_tab_bar = false,
+  window_background_opacity = 0.97,
   keys = {
     {
       key = "h",
