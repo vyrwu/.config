@@ -1,0 +1,7 @@
+browser "open"
+
+# hjkl navigation
+bind-key h quit # Go back (e.g., from article to feed list)
+bind-key j next # Go to the next article in the list
+bind-key k prev # Go to the previous article in the list
+bind-key l open # Open selected article (using the configured browser)

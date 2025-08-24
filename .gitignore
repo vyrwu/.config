@@ -15,3 +15,4 @@
 !/nix/modules/*
 !/nix/modules/home-manager/*
 !/aerospace
+!/newsboat

@@ -28,6 +28,7 @@ let
       pkgs.redis
       pkgs.age
       pkgs.sops
+      pkgs.newsboat
     ];
 
     docker = [
