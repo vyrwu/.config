@@ -15,5 +15,7 @@
       keyFile = "/Users/${username}/.config/sops/age/keys.txt";
     };
     secrets.avante_gemini_api_key = { };
+    secrets.google_search_api_key = { };
+    secrets.google_search_engine_id = { };
   };
 }

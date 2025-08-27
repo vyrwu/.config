@@ -527,19 +527,45 @@ require("lazy").setup({
       },
     },
     opts = {
-      mode = "legacy",
       provider = "gemini",
       providers = {
         gemini = {
+          mode = "agentic",
           model = "gemini-2.5-flash",
           timeout = 10000,
-          disable_tools = true,
+          disabled_tools = {
+            "git_diff",
+            "glob",
+            "search_keyword",
+            "read_file_toplevel_symbols",
+            "read_file",
+            "web_search",
+            "fetch",
+            -- "replace_in_file"
+            -- "rag_search",
+            -- "git_commit",
+            -- "python",
+            -- "create_file",
+            -- "move_path",
+            -- "copy_path",
+            -- "delete_path",
+            -- "create_dir",
+            -- "bash",
+          },
           extra_request_body = {
             generationConfig = {
               temperature = 0.75,
             },
           },
         },
+      },
+      web_search_engine = {
+        provider = "google",
+        proxy = nil,
+      },
+      rules = {
+        -- system prompts
+        global_dir = "~/.config/avante/rules",
       },
       windows = {
         wrap = true,

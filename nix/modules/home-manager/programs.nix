@@ -29,6 +29,8 @@
     export XMLFORMAT_CONF="$HOME/.config/.xmlformat.conf";
     export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt";
     export AVANTE_GEMINI_API_KEY="$(cat ${config.sops.secrets.avante_gemini_api_key.path})";
+    export GOOGLE_SEARCH_API_KEY="$(cat ${config.sops.secrets.google_search_api_key.path})";
+    export GOOGLE_SEARCH_ENGINE_ID="$(cat ${config.sops.secrets.google_search_engine_id.path})";
 
   '';
   programs.zsh.autosuggestion.enable = true;
