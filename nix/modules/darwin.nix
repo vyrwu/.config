@@ -29,7 +29,8 @@
   system.defaults.NSGlobalDomain.KeyRepeat = 3;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
   system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 3.0;
-  system.defaults.NSGlobalDomain._HIHideMenuBar = false;
+  system.defaults.NSGlobalDomain._HIHideMenuBar = true;
+  system.defaults.WindowManager.AutoHide = true;
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.orientation = "left";

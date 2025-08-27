@@ -115,11 +115,16 @@ require("lazy").setup({
       local fb_actions = require("telescope._extensions.file_browser.actions")
       require("telescope").setup({
         defaults = {
+          -- avoid previewing large files
+          preview = {
+            filesize_limit = 0.1, -- MB
+          },
           layout_strategy = "vertical",
           layout_config = {
+            -- fullscreen
             vertical = {
-              height = 0.95,
-              width = 0.95,
+              height = { padding = 0 },
+              width = { padding = 0 },
               preview_height = 0.6,
             },
           },
@@ -283,16 +288,15 @@ require("lazy").setup({
   {
     "kdheepak/lazygit.nvim",
     lazy = false,
-    -- optional for floating window border decoration
-    init = function()
-      vim.keymap.set({ "n", "v" }, "<leader>gg", vim.cmd.LazyGit, {})
-    end,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
     keys = {
       { "<leader>gg", vim.cmd.LazyGit, desc = "Open LazyGit." },
     },
+    init = function()
+      vim.g.lazygit_floating_window_scaling_factor = 1
+    end,
   },
   { "LnL7/vim-nix", ft = "nix" },
   {
@@ -651,7 +655,13 @@ require("lazy").setup({
           ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
         },
       },
-      -- you can enable a preset for easier configuration
+      views = {
+        cmdline_popup = {
+          position = {
+            row = "90%",
+          },
+        },
+      },
       presets = {
         bottom_search = true, -- use a classic bottom cmdline for search
         command_palette = true, -- position the cmdline and popupmenu together
@@ -684,5 +694,10 @@ require("lazy").setup({
       fuzzy = { implementation = "prefer_rust_with_warning" },
     },
     opts_extend = { "sources.default" },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
   },
 })
