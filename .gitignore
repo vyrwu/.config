@@ -3,7 +3,9 @@
 !.gitmodules
 !README.md
 !/nvim
-!/nvim_old
+!/nvim/lua
+!/nvim/lua/plugins
+!/nvim/lua/plugins/*
 !/tmux
 !/wezterm
 !/zsh
