@@ -28,6 +28,7 @@ let
       pkgs.age
       pkgs.sops
       pkgs.newsboat
+      pkgs.lazysql
     ];
 
     docker = [
@@ -35,6 +36,7 @@ let
       pkgs.docker-credential-helpers
       pkgs.docker
       pkgs.docker-buildx
+      pkgs.lazydocker
     ];
 
     kubernetes = [
