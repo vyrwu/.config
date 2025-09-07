@@ -29,6 +29,8 @@ let
       pkgs.sops
       pkgs.newsboat
       pkgs.lazysql
+      pkgs.pritunl-client
+      pkgs.gemini-cli
     ];
 
     docker = [
@@ -80,6 +82,7 @@ let
       pkgs.mypy
       pkgs.rye
       pkgs.ruff
+      pkgs.uv
     ];
 
     js = [
