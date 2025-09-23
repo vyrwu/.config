@@ -1,9 +1,13 @@
 keys:
-  - &alek age1ukyl0j56rra50wr55a7lw50504tfhqjentaf793gty5unxxxl9ws3m7r27
-  - &machine age1r3r7zk5y3d47gh506fvdsrllznujtd96z52x6t9l6tmccvcd3gvsahp7cw
+  - &users:
+    - &ano age1yubikey1qtndr2zqpv2hzs8kfvgkr7qxeatskxpqqgsyzwtck49e2p4x2tdqv5v05m4
+    - &anob age1yubikey1qtxwmg03hm8uy6n5603zdd8ahxemj7gdhg4598hv0qxd4gt69svuqtl0fmh
+  - &hosts:
+    - &viz age1mfnyttfyr4l3zzqlk0x47axman2679f6gp0eqyfexd5e2mf76e8q0detrv
 creation_rules:
   - path_regex: secrets.yaml
     key_groups:
       - age:
-          - *alek
-          - *machine
+          - *ano
+          - *anob
+          - *viz

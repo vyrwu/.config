@@ -25,12 +25,17 @@ let
       pkgs.codespell
       pkgs.openapi-generator-cli
       pkgs.redis
-      pkgs.age
-      pkgs.sops
       pkgs.newsboat
       pkgs.lazysql
       pkgs.pritunl-client
       pkgs.gemini-cli
+    ];
+
+    encryption = [
+      pkgs.sops
+      pkgs.yubikey-manager
+      pkgs.age
+      pkgs.age-plugin-yubikey
     ];
 
     docker = [

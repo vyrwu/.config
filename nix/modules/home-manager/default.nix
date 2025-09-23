@@ -18,8 +18,8 @@
     home.homeDirectory = "/Users/${username}";
 
     imports = [
-      (import ./home.nix { inherit pkgs; })
       ./programs.nix
+      (import ./home.nix { inherit pkgs; })
       (import ./sops { inherit inputs username; })
     ];
   };

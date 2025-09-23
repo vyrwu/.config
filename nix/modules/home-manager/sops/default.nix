@@ -7,15 +7,16 @@
   imports = [ inputs.sops-nix.homeManagerModules.sops ];
   sops = {
     defaultSopsFile = ./secrets.yaml;
-    defaultSopsFormat = "yaml";
     age = {
       sshKeyPaths = [
-        "/Users/${username}/.ssh/sops_ed25519"
+        "/Users/${username}/.ssh/id_ed25519"
       ];
       keyFile = "/Users/${username}/.config/sops/age/keys.txt";
     };
-    secrets.gemini_api_key = { };
-    secrets.google_search_api_key = { };
-    secrets.google_search_engine_id = { };
+    secrets = {
+      gemini_api_key = { };
+      google_search_api_key = { };
+      google_search_engine_id = { };
+    };
   };
 }
