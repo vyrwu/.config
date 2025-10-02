@@ -49,9 +49,16 @@
   '';
   programs.zsh.autosuggestion.enable = true;
 
-  programs.git.aliases = {
-    co = "checkout";
-    st = "status";
+  programs.git = {
+    enable = true;
+
+    aliases = {
+      co = "checkout";
+      st = "status";
+    };
+
+    userEmail = "dev.anowak@gmail.com";
+    userName = "vyrwu";
   };
 
   programs.zsh.oh-my-zsh.enable = true;

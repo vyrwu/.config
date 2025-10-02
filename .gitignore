@@ -9,7 +9,7 @@
 !/tmux
 !/wezterm
 !/zsh
-!/git
+!/git/alias
 !/bin
 !/nix
 !/nix/*
