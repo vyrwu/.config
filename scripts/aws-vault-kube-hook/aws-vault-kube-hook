@@ -1,0 +1,80 @@
+#!/bin/bash
+
+set -e # Exit immediately if a command exits with a non-zero status.
+
+PROFILE_NAME="$1"
+if [ -z "$PROFILE_NAME" ]; then
+  echo "Error: AWS profile name not provided." >&2
+  exit 1
+fi
+
+# --- Configuration ---
+# Path to the central cluster configuration file.
+# Ensure this path is correct for your user's environment.
+CLUSTER_CONFIG_FILE="${HOME}/.config/aws/eks/clusters.yaml"
+
+# Ensure the target directory exists before we try to write to it.
+mkdir -p "$(dirname "$OUTPUT_FILE")"
+
+# --- Setup ---
+SESSION_KUBECONFIG=$(mktemp)
+trap 'rm -f "${SESSION_KUBECONFIG}"' EXIT
+PERMANENT_KUBECONFIG="${HOME}/.kube/config"
+
+echo "aws-vault-hook: Activated for profile: $PROFILE_NAME"
+echo "----------------------------------------------------"
+
+# --- Main Logic ---
+if [ ! -f "$CLUSTER_CONFIG_FILE" ]; then
+  echo "Warning: Cluster config file not found at '$CLUSTER_CONFIG_FILE'. Skipping EKS setup." >&2
+else
+  # 1. Get the AWS Account ID for the current SSO profile
+  ACCOUNT_ID=$(aws configure get sso_account_id --profile "$PROFILE_NAME")
+  if [ -z "$ACCOUNT_ID" ]; then
+    echo "Warning: Could not determine sso_account_id for profile '$PROFILE_NAME'. Skipping EKS setup." >&2
+  else
+    echo "aws-vault-hook: Profile is for Account ID: $ACCOUNT_ID. Searching for matching clusters..."
+
+    # 2. Use yq to find all clusters in the YAML that match our Account ID
+    # The output is formatted as "name region alias" (tab-separated)
+    CLUSTERS_TO_CONFIG=$(yq ".[] | select(.account_id == \"$ACCOUNT_ID\") | [.name, .region, .alias] | @tsv" "$CLUSTER_CONFIG_FILE")
+
+    if [ -z "$CLUSTERS_TO_CONFIG" ]; then
+      echo "aws-vault-hook: No clusters found in config for this account."
+    else
+      # 3. Loop through the query results and configure each cluster
+      PRIMARY_CONTEXT=""
+      while IFS=$'\t' read -r cluster_name cluster_region context_alias; do
+        echo "aws-vault-hook: Generating config for cluster '$cluster_name' (alias: '$context_alias')..."
+        aws eks update-kubeconfig \
+          --kubeconfig "${SESSION_KUBECONFIG}" \
+          --name "$cluster_name" \
+          --region "$cluster_region" \
+          --alias "$context_alias" > /dev/null
+        # Set the first found cluster as the default for the session
+        if [ -z "$PRIMARY_CONTEXT" ]; then
+          PRIMARY_CONTEXT="$context_alias"
+        fi
+      done <<< "$CLUSTERS_TO_CONFIG"
+
+      # Set the primary context for the session
+      if [ -n "$PRIMARY_CONTEXT" ]; then
+          echo "aws-vault-hook: Setting default session context to '$PRIMARY_CONTEXT'"
+          kubectl config --kubeconfig="${SESSION_KUBECONFIG}" use-context "$PRIMARY_CONTEXT" > /dev/null
+      fi
+    fi
+  fi
+fi
+
+# --- Activation and Shell Hand-off ---
+if [ ! -s "${SESSION_KUBECONFIG}" ]; then
+  echo "aws-vault-hook: No EKS contexts generated. Using default kubeconfig."
+  trap - EXIT; rm -f "${SESSION_KUBECONFIG}"
+else
+  export KUBECONFIG="${PERMANENT_KUBECONFIG}:${SESSION_KUBECONFIG}"
+  echo "aws-vault-hook: Kubeconfig prepared. Merged contexts are now available."
+fi
+
+echo "----------------------------------------------------"
+echo "aws-vault-hook: Starting interactive shell..."
+exec "${SHELL:-bash}"

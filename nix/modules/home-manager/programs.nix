@@ -32,6 +32,20 @@
     export GOOGLE_SEARCH_API_KEY="$(cat ${config.sops.secrets.google_search_api_key.path})";
     export GOOGLE_SEARCH_ENGINE_ID="$(cat ${config.sops.secrets.google_search_engine_id.path})";
 
+    # Alias for aws-vault to automatically update kubeconfig on login
+    alias av='_aws_vault_kube_exec'
+
+    _aws_vault_kube_exec() {
+      if [ -z "$1" ]; then
+        echo "Usage: av <profile-name>"
+        aws-vault list
+        return 1
+      fi
+      
+      # The AWS_VAULT variable is set by the aws-vault process itself.
+      # We pass it as an argument to our hook script.
+      aws-vault exec "$1" -- ~/.config/scripts/aws-vault-kube-hook/aws-vault-kube-hook "$1"
+    }
   '';
   programs.zsh.autosuggestion.enable = true;
 
