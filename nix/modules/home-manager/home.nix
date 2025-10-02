@@ -6,6 +6,7 @@ let
       pkgs.gimp
       pkgs.slack
       pkgs.firefox
+      pkgs.notion-app
     ];
 
     cli = [
