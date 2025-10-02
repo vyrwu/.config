@@ -4,6 +4,7 @@ keys:
     - &anob age1yubikey1qtxwmg03hm8uy6n5603zdd8ahxemj7gdhg4598hv0qxd4gt69svuqtl0fmh
   - &hosts:
     - &viz age1mfnyttfyr4l3zzqlk0x47axman2679f6gp0eqyfexd5e2mf76e8q0detrv
+    - &onyx age1er57myl7h58094xqu0w0hmu745qzvz9xn37u942ye3dcexxrzdws7w6mnt
 creation_rules:
   - path_regex: secrets.yaml
     key_groups:
@@ -11,3 +12,4 @@ creation_rules:
           - *ano
           - *anob
           - *viz
+          - *onyx
