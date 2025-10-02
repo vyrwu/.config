@@ -5,6 +5,7 @@ let
       pkgs.aerospace
       pkgs.gimp
       pkgs.slack
+      pkgs.firefox
     ];
 
     cli = [
@@ -25,10 +26,11 @@ let
       pkgs.codespell
       pkgs.openapi-generator-cli
       pkgs.redis
-      pkgs.newsboat
+      # pkgs.newsboat
       pkgs.lazysql
       pkgs.pritunl-client
       pkgs.gemini-cli
+      pkgs.wezterm
     ];
 
     encryption = [

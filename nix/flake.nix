@@ -67,6 +67,17 @@
             username = "aleksandernowak";
           };
         };
+        "Aleksanders-MacBook-Pro" = lib.darwinSystem {
+          pkgs = pkgsFor.aarch64-darwin;
+          modules = [
+            ./modules/hosts/macbook-wawa.nix
+          ] ++ sharedModules;
+          specialArgs = {
+            inherit self inputs outputs;
+            # FIXME: This should rather be computed based on hostnames.
+            username = "aleksandernowak";
+          };
+        };
         "Aleks-MacBook-Pro" = lib.darwinSystem {
           pkgs = pkgsFor.x86_64-darwin;
           modules = [

@@ -2,9 +2,11 @@
 
 Collection of all my MacOS/Linux configuration files.
 
-## Initial installation
+### Requirements
 
-Requires a working [Nix](https://nixos.org/download/) installation.
+- [Nix](https://nixos.org/download/)
+- [Brew](https://brew.sh/)
+- [TMP](https://github.com/tmux-plugins/tpm?tab=readme-ov-file#installation)
 
 ## TODO
 
@@ -15,3 +17,9 @@ Requires a working [Nix](https://nixos.org/download/) installation.
 - Install Nix flake directly from GitHub
 - Check in my Oryx keyboard layout to Version Control
 - Store personal age key on Yubikey.
+- Bootstrap script that does the following
+  - Automatically install TMP upon new machine bootstrap.
+  - Automatically install Nix and Brew.
+  - Automatically generate machine's SSH key, and add it to sops/github.
+- Activation script to set a pre-defined wallpapper
+- Set default browser to Firefox

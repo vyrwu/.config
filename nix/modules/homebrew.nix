@@ -1,8 +1,5 @@
 { ... }:
 {
   homebrew.enable = true;
-  homebrew.casks = [
-    "wezterm"
-    "nikitabobko/tap/aerospace"
-  ];
+  homebrew.casks = [ "1password" ];
 }
