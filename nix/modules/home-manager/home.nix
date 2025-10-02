@@ -15,7 +15,6 @@ let
       pkgs.wget
       pkgs.parallel
       pkgs.just
-      pkgs.aws-vault
       pkgs.pre-commit
       pkgs.copier
       # pkgs.texliveFull
@@ -31,6 +30,12 @@ let
       pkgs.pritunl-client
       pkgs.gemini-cli
       pkgs.wezterm
+    ];
+
+    aws = [
+      pkgs.awscli2
+      pkgs.aws-vault
+      pkgs.aws-sso-util
     ];
 
     encryption = [

@@ -23,3 +23,10 @@ Collection of all my MacOS/Linux configuration files.
   - Automatically generate machine's SSH key, and add it to sops/github.
 - Activation script to set a pre-defined wallpapper
 - Set default browser to Firefox
+
+## Populate AWS Config with all available SSO accounts and roles
+
+```
+AWS_DEFAULT_SSO_START_URL=<AWS_SSO_START_URL> aws-sso-util configure populate --region <AWS_REGION>
+
+```
