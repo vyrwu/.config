@@ -59,6 +59,14 @@
 
     userEmail = "dev.anowak@gmail.com";
     userName = "vyrwu";
+
+    extraConfig = {
+      url = {
+        "ssh://git@github.com/" = {
+          insteadOf = "https://github.com/";
+        };
+      };
+    };
   };
 
   programs.zsh.oh-my-zsh.enable = true;
