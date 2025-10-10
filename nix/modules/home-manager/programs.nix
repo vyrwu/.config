@@ -15,6 +15,7 @@
   };
   programs.zsh.initExtra = ''
     ### PATH
+    export PATH="$PATH:$HOME/.local/bin"
     # Disables builtin Python in favour of Nix-managed one.
     export PATH=$(echo $PATH | sed -r 's|/Library/Frameworks/Python.framework/Versions/3.11/bin:||')
     export PATH=$(echo $PATH | sed -r 's|/Library/Frameworks/Python.framework/Versions/3.10/bin:||')
