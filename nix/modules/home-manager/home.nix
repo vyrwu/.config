@@ -118,10 +118,12 @@ let
       pkgs.tailwindcss-language-server
     ];
 
-    terraform = [
+    iac = [
       pkgs.terraform
       pkgs.terraform-ls
       pkgs.tflint
+      pkgs.opentofu
+      pkgs.atmos
     ];
 
     lua = [
