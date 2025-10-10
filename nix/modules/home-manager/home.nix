@@ -18,7 +18,7 @@ let
       pkgs.just
       pkgs.pre-commit
       pkgs.copier
-      # pkgs.texliveFull
+      pkgs.texliveFull
       pkgs.textlint
       pkgs.textlint-rule-write-good
       pkgs.textlint-rule-common-misspellings
@@ -26,7 +26,7 @@ let
       pkgs.codespell
       pkgs.openapi-generator-cli
       pkgs.redis
-      # pkgs.newsboat
+      pkgs.newsboat
       pkgs.lazysql
       pkgs.pritunl-client
       pkgs.gemini-cli

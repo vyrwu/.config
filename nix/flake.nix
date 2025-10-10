@@ -2,15 +2,15 @@
   description = "My nix-darwin config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
 
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -60,7 +60,8 @@
           pkgs = pkgsFor.aarch64-darwin;
           modules = [
             ./modules/hosts/macbook-zn.nix
-          ] ++ sharedModules;
+          ]
+          ++ sharedModules;
           specialArgs = {
             inherit self inputs outputs;
             # FIXME: This should rather be computed based on hostnames.
@@ -71,7 +72,8 @@
           pkgs = pkgsFor.aarch64-darwin;
           modules = [
             ./modules/hosts/macbook-wawa.nix
-          ] ++ sharedModules;
+          ]
+          ++ sharedModules;
           specialArgs = {
             inherit self inputs outputs;
             # FIXME: This should rather be computed based on hostnames.
@@ -82,7 +84,8 @@
           pkgs = pkgsFor.x86_64-darwin;
           modules = [
             ./modules/hosts/macbook-personal.nix
-          ] ++ sharedModules;
+          ]
+          ++ sharedModules;
           specialArgs = {
             inherit self inputs outputs;
             # FIXME: This should rather be computed based on hostnames.
