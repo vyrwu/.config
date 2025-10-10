@@ -17,6 +17,7 @@
       gemini_api_key = { };
       google_search_api_key = { };
       google_search_engine_id = { };
+      gh_token = { };
     };
   };
 }
