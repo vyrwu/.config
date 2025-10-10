@@ -39,6 +39,10 @@ let
       pkgs.aws-sso-util
     ];
 
+    gcp = [
+      pkgs.google-cloud-sdk
+    ];
+
     encryption = [
       pkgs.sops
       pkgs.yubikey-manager
