@@ -46,6 +46,8 @@
 
   system.defaults.loginwindow.autoLoginUser = "${username}";
 
+  system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;
 
