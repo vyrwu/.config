@@ -70,6 +70,7 @@ let
       pkgs.eks-node-viewer
       pkgs.kind
       pkgs.eksctl
+      pkgs.kubent
     ];
 
     go = [
