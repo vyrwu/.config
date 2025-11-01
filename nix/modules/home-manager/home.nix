@@ -31,6 +31,8 @@ let
       pkgs.pritunl-client
       pkgs.gemini-cli
       pkgs.wezterm
+      pkgs.zoxide
+      pkgs.fzf
     ];
 
     aws = [

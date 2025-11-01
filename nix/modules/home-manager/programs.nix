@@ -12,6 +12,7 @@
     i = "istioctl";
     k9h = "k9s --headless";
     ghpr = "gh pr create --fill";
+    cd = "z";
   };
   programs.zsh.initExtra = ''
     ### PATH
@@ -51,6 +52,10 @@
       # We pass it as an argument to our hook script.
       aws-vault exec "$1" -- ~/.config/scripts/aws-vault-kube-hook/aws-vault-kube-hook "$1"
     }
+
+    # Zoxide config
+    export _ZO_DATA_DIR="$HOME/.config/zoxide"
+    eval "$(zoxide init zsh)"
   '';
   programs.zsh.autosuggestion.enable = true;
 
