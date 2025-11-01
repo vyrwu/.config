@@ -60,6 +60,7 @@
     eval "$(zoxide init zsh)"
   '';
   programs.zsh.autosuggestion.enable = true;
+  programs.zsh.enableCompletion = true;
 
   programs.git = {
     enable = true;
