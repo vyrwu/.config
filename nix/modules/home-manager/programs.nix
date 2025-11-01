@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   programs.zsh.enable = true;
   programs.zsh.shellAliases = {
@@ -26,15 +26,15 @@
     export PATH="$PATH:$HOME/.config/scripts"
 
     ### SHELL VARIABLES
-    export EDITOR="nvim";
-    export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json";
-    export XMLFORMAT_CONF="$HOME/.config/.xmlformat.conf";
+    export EDITOR="nvim"
+    export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json"
+    export XMLFORMAT_CONF="$HOME/.config/.xmlformat.conf"
     export ATMOS_COMPONENTS_TERRAFORM_COMMAND="tofu"
 
-    export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt";
-    export GEMINI_API_KEY="$(cat ${config.sops.secrets.gemini_api_key.path})";
-    export GOOGLE_SEARCH_API_KEY="$(cat ${config.sops.secrets.google_search_api_key.path})";
-    export GOOGLE_SEARCH_ENGINE_ID="$(cat ${config.sops.secrets.google_search_engine_id.path})";
+    export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
+    export GEMINI_API_KEY="$(cat ${config.sops.secrets.gemini_api_key.path})"
+    export GOOGLE_SEARCH_API_KEY="$(cat ${config.sops.secrets.google_search_api_key.path})"
+    export GOOGLE_SEARCH_ENGINE_ID="$(cat ${config.sops.secrets.google_search_engine_id.path})"
     export GH_TOKEN="$(cat ${config.sops.secrets.gh_token.path})"
 
 
@@ -56,6 +56,10 @@
     # Zoxide config
     export _ZO_DATA_DIR="$HOME/.config/zoxide"
     eval "$(zoxide init zsh)"
+
+    # Zsh Vi Mode
+    source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    export ZVM_VI_HIGHLIGHT_BACKGROUND="#434c5e"
   '';
   programs.zsh.autosuggestion.enable = true;
   programs.zsh.enableCompletion = true;
