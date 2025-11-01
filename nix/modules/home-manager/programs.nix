@@ -2,19 +2,17 @@
 {
   programs.zsh.enable = true;
   programs.zsh.shellAliases = {
-    tf = "terraform";
-    tfws = "terraform workspace select";
-    tffv = "terraform fmt --recursive && tf validate";
+    tf = "tofu";
     python = "python3";
     k = "kubectl";
     kcvm = "kubectl config view --minify | grep current";
     kcuc = "kubectl config use-context";
     i = "istioctl";
-    k9h = "k9s --headless";
-    ghpr = "gh pr create --fill";
+    k9s = "k9s --headless";
     cd = "z";
     cat = "bat --paging=never";
     ls = "lla --sort size -T";
+    lg = "lazygit";
   };
   programs.zsh.initExtra = ''
     ### PATH
