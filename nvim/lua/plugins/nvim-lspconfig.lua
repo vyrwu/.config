@@ -7,8 +7,9 @@ return {
     -- ref: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#omnisharp
     { "Hoffs/omnisharp-extended-lsp.nvim", lazy = false },
   },
-  init = function()
-    -- global LSP actions
+  init = function() end,
+  config = function()
+    -- LSP Actions
     vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
@@ -29,39 +30,39 @@ return {
     vim.keymap.set("n", "<leader>gr", function()
       require("telescope.builtin").lsp_references()
     end, opts)
-  end,
-  config = function()
+
+    --- Server Configuration
     local on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
     end
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-    local lspconfig = require("lspconfig")
     local util = require("lspconfig/util")
+    local getDefault = function()
+      return {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+    end
 
-    local lsps = {
-      "gopls",
-      "terraformls",
-      "helm_ls",
-      "jsonls",
-      -- "yamlls",
-      "bashls",
-      "ts_ls",
-      "pyright",
-      "nil_ls",
-      "htmx",
-      "tailwindcss",
-      "html",
-      "templ",
-      "omnisharp",
-    }
-
-    for _, v in pairs(lsps) do
-      if v == "gopls" then
+    local config = {
+      lua_ls = getDefault,
+      pyright = getDefault,
+      terraformls = getDefault,
+      jsonls = getDefault,
+      yamlls = getDefault,
+      bashls = getDefault,
+      ts_ls = getDefault,
+      nil_ls = getDefault,
+      htmx = getDefault,
+      tailwindcss = getDefault,
+      html = getDefault,
+      templ = getDefault,
+      gopls = function()
         capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
         capabilities.workspace.workspaceFolders = true
-        lspconfig[v].setup({
+        return {
           on_attach = on_attach,
           capabilities = capabilities,
           cmd = { "gopls" },
@@ -79,32 +80,19 @@ return {
               },
             },
           },
-        })
-        goto continue
-      end
-
-      if v == "helm_ls" then
-        lspconfig[v].setup({
+        }
+      end,
+      helm_ls = function()
+        return {
           on_attach = on_attach,
           capabilities = capabilities,
           cmd = { "helm_ls", "serve" },
           filetypes = { "helm" },
           root_dir = util.root_pattern("Chart.yaml"),
-        })
-        goto continue
-      end
-
-      if v == "pyright" then
-        lspconfig[v].setup({
-          on_attach = on_attach,
-          capabilities = capabilities,
-          filetypes = { "python" },
-        })
-        goto continue
-      end
-
-      if v == "omnisharp" then
-        lspconfig[v].setup({
+        }
+      end,
+      omnisharp = function()
+        return {
           on_attach = function(client, bufnr)
             -- extended code actions from "Hoffs/omnisharp-extended-lsp.nvim"
             -- that make go_to_definiton work
@@ -117,17 +105,13 @@ return {
           end,
           capabilities = capabilities,
           cmd = { "omnisharp" },
-        })
+        }
+      end,
+    }
 
-        goto continue
-      end
-
-      lspconfig[v].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
-
-      ::continue::
+    for server, getConfig in pairs(config) do
+      vim.lsp.config(server, getConfig())
+      vim.lsp.enable(server)
     end
   end,
 }
