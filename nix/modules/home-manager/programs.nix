@@ -14,6 +14,7 @@
     ghpr = "gh pr create --fill";
     cd = "z";
     cat = "bat --paging=never";
+    ls = "lla --sort size -T";
   };
   programs.zsh.initExtra = ''
     ### PATH

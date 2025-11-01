@@ -34,6 +34,7 @@ let
       pkgs.zoxide
       pkgs.fzf
       pkgs.bat
+      pkgs.lla
     ];
 
     aws = [
