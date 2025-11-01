@@ -33,6 +33,7 @@ let
       pkgs.wezterm
       pkgs.zoxide
       pkgs.fzf
+      pkgs.bat
     ];
 
     aws = [

@@ -13,6 +13,7 @@
     k9h = "k9s --headless";
     ghpr = "gh pr create --fill";
     cd = "z";
+    cat = "bat --paging=never";
   };
   programs.zsh.initExtra = ''
     ### PATH
