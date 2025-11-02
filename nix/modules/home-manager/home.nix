@@ -29,12 +29,16 @@ let
       pkgs.newsboat
       pkgs.lazysql
       pkgs.pritunl-client
-      pkgs.gemini-cli
       pkgs.wezterm
       pkgs.zoxide
       pkgs.fzf
       pkgs.bat
       pkgs.lla
+    ];
+
+    ai = [
+      pkgs.gemini-cli
+      pkgs.claude-code
     ];
 
     aws = [

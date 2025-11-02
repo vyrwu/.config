@@ -14,6 +14,8 @@
     ls = "lla --sort size -T";
     lg = "lazygit";
     q = "exit";
+    claude = "clear && claude";
+    gemini = "clear && gemini";
   };
   programs.zsh.initExtra = ''
     ### PATH
