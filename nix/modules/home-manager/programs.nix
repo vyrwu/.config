@@ -13,6 +13,7 @@
     cat = "bat --paging=never";
     ls = "lla --sort size -T";
     lg = "lazygit";
+    q = "exit";
   };
   programs.zsh.initExtra = ''
     ### PATH
