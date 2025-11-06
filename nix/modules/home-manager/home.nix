@@ -119,6 +119,8 @@ let
       pkgs.nodePackages.typescript-language-server
       pkgs.eslint_d
       pkgs.prettierd
+      pkgs.esbuild
+      pkgs.yarn
     ];
 
     nix = [
