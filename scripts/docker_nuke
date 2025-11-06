@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "Removing all containers..."
+docker ps -a -q | xargs -r docker rm &> /dev/null
+echo "Removing all images..."
+docker image ls --all --format json | jq -r '.ID' | xargs -r docker rmi -f &> /dev/null
+echo "Removing all volumes..."
+docker volume ls --format json | jq -r '.Name' | xargs -r docker volume rm &> /dev/null
