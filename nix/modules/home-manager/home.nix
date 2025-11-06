@@ -79,6 +79,7 @@ let
       pkgs.kind
       pkgs.eksctl
       pkgs.kubent
+      pkgs.kubeconform
     ];
 
     go = [
