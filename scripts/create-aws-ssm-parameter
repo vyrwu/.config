@@ -1,0 +1,302 @@
+#!/bin/bash
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFIG_FILE="$HOME/.config/aws/ssm/parameter-store/config.yaml"
+
+usage() {
+    cat << EOF
+Usage: $0 --name PARAMETER_NAME --value PARAMETER_VALUE [OPTIONS]
+
+Required:
+  --name NAME           SSM Parameter name
+  --value VALUE         SSM Parameter value (or use HEREDOC with --)
+
+Options:
+  --region REGION       Deploy to specific region
+  --all-regions         Deploy to all regions in config
+  --force               Delete parameter if exists before creating
+  --dryrun              Print creation plan without executing
+  --help                Show this help message
+
+Examples:
+  $0 --name /myapp/db/password --value mysecret --region us-east-1
+  $0 --name /myapp/db/password --value mysecret --all-regions --force
+  $0 --name /myapp/db/password --value mysecret --all-regions --dryrun
+  $0 --name /myapp/config/json --value - --region us-east-1 << EOF
+{
+  "database": "production",
+  "timeout": 30
+}
+EOF
+EOF
+}
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >&2
+}
+
+error() {
+    log "ERROR: $*" >&2
+    exit 1
+}
+
+parse_yaml() {
+    local file="$1"
+    local prefix="$2"
+
+    if [[ "$prefix" == "accounts" ]]; then
+        yq eval '.accounts[] | .name + ":" + .id + ":" + (.regions | join(","))' "$file"
+    elif [[ "$prefix" == "regions" ]]; then
+        yq eval '.accounts[].regions[]' "$file" | sort -u
+    elif [[ "$prefix" == "author" ]]; then
+        yq eval '.author // "unknown"' "$file"
+    fi
+}
+
+check_dependencies() {
+    for cmd in aws yq; do
+        if ! command -v "$cmd" &> /dev/null; then
+            error "$cmd is required but not installed"
+        fi
+    done
+}
+
+validate_aws_region() {
+    local region="$1"
+    
+    # Get list of valid AWS regions
+    local valid_regions
+    valid_regions=$(aws --no-cli-pager ec2 describe-regions --query 'Regions[].RegionName' --output text 2>/dev/null)
+    
+    if [[ -z "$valid_regions" ]]; then
+        error "Unable to fetch valid AWS regions. Check your AWS credentials and network connectivity."
+    fi
+    
+    # Check if provided region is in the list
+    for valid_region in $valid_regions; do
+        if [[ "$region" == "$valid_region" ]]; then
+            return 0
+        fi
+    done
+    
+    error "Invalid AWS region: $region. Use 'aws ec2 describe-regions' to see valid regions."
+}
+
+check_parameter_exists() {
+    local region="$1"
+    local parameter_name="$2"
+
+    aws --no-cli-pager ssm get-parameter --region "$region" --name "$parameter_name" &>/dev/null
+}
+
+delete_parameter() {
+    local region="$1"
+    local parameter_name="$2"
+    local dryrun="$3"
+
+    if [[ "$dryrun" == true ]]; then
+        log "[DRYRUN] Would delete parameter $parameter_name in region $region"
+    else
+        log "Deleting parameter $parameter_name in region $region"
+        aws --no-cli-pager ssm delete-parameter --region "$region" --name "$parameter_name"
+    fi
+}
+
+create_parameter() {
+    local region="$1"
+    local parameter_name="$2"
+    local parameter_value="$3"
+    local author="$4"
+    local dryrun="$5"
+
+    if [[ "$dryrun" == true ]]; then
+        log "[DRYRUN] Would create parameter $parameter_name in region $region"
+        log "[DRYRUN]   Type: SecureString"
+        log "[DRYRUN]   Tags: managed-by=aws-cli, created-by=$author"
+    else
+        log "Creating parameter $parameter_name in region $region"
+        aws --no-cli-pager ssm put-parameter \
+            --region "$region" \
+            --name "$parameter_name" \
+            --value "$parameter_value" \
+            --type "SecureString" \
+            --tags "Key=managed-by,Value=aws-cli" "Key=created-by,Value=$author"
+    fi
+}
+
+main() {
+    local parameter_name=""
+    local parameter_value=""
+    local target_region=""
+    local all_regions=false
+    local force=false
+    local dryrun=false
+
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --name)
+                parameter_name="$2"
+                shift 2
+                ;;
+            --value)
+                if [[ "$2" == "-" ]]; then
+                    parameter_value=$(cat)
+                    shift 2
+                else
+                    parameter_value="$2"
+                    shift 2
+                fi
+                ;;
+            --region)
+                target_region="$2"
+                shift 2
+                ;;
+            --all-regions)
+                all_regions=true
+                shift
+                ;;
+            --force)
+                force=true
+                shift
+                ;;
+            --dryrun)
+                dryrun=true
+                shift
+                ;;
+            --help)
+                usage
+                exit 0
+                ;;
+            *)
+                error "Unknown option: $1"
+                ;;
+        esac
+    done
+
+    if [[ -z "$parameter_name" ]] || [[ -z "$parameter_value" ]]; then
+        error "Both --name and --value are required"
+    fi
+
+    if [[ "$all_regions" == true ]] && [[ -n "$target_region" ]]; then
+        error "Cannot specify both --region and --all-regions"
+    fi
+
+    if [[ "$all_regions" == false ]] && [[ -z "$target_region" ]]; then
+        target_region="$AWS_REGION"
+        if [[ -z "$target_region" ]]; then
+            error "Must specify --region, --all-regions, or have AWS_REGION environment variable set"
+        fi
+        log "Using current AWS region: $target_region"
+    fi
+
+    check_dependencies
+
+    if [[ ! -f "$CONFIG_FILE" ]]; then
+        error "Config file not found: $CONFIG_FILE"
+    fi
+
+    local regions_to_process=()
+
+    # Get current AWS account ID first to determine allowed regions
+    local current_account_id
+    current_account_id=$(aws --no-cli-pager sts get-caller-identity --query Account --output text 2>/dev/null)
+    if [[ -z "$current_account_id" ]]; then
+        error "Unable to determine current AWS account ID. Ensure you are authenticated."
+    fi
+    
+    # Find the account config for current account
+    local account_regions=()
+    while IFS=':' read -r acc_name acc_id acc_regions; do
+        if [[ "$acc_id" == "$current_account_id" ]]; then
+            IFS=',' read -ra account_regions <<< "$acc_regions"
+            break
+        fi
+    done < <(parse_yaml "$CONFIG_FILE" "accounts")
+    
+    if [[ ${#account_regions[@]} -eq 0 ]]; then
+        error "Current account ID $current_account_id is not configured in $CONFIG_FILE"
+    fi
+    
+    if [[ "$all_regions" == true ]]; then
+        regions_to_process=("${account_regions[@]}")
+    else
+        regions_to_process=("$target_region")
+        
+        # Validate single region against account allowlist
+        local region_allowed=false
+        for allowed_region in "${account_regions[@]}"; do
+            if [[ "$target_region" == "$allowed_region" ]]; then
+                region_allowed=true
+                break
+            fi
+        done
+        if [[ "$region_allowed" == false ]]; then
+            error "Region $target_region is not allowed for account $current_account_id. Allowed regions: ${account_regions[*]}"
+        fi
+    fi
+
+    if [[ ${#regions_to_process[@]} -eq 0 ]]; then
+        error "No regions found to process"
+    fi
+
+    # Validate all regions are valid AWS regions
+    for region in "${regions_to_process[@]}"; do
+        validate_aws_region "$region"
+    done
+
+    local author
+    author=$(parse_yaml "$CONFIG_FILE" "author")
+
+    if [[ "$all_regions" == true ]] && [[ "$force" == false ]] && [[ "$dryrun" == false ]]; then
+        log "Checking parameter existence in all regions before creation..."
+        local exists_in_regions=()
+
+        for region in "${regions_to_process[@]}"; do
+            if check_parameter_exists "$region" "$parameter_name"; then
+                exists_in_regions+=("$region")
+            fi
+        done
+
+        if [[ ${#exists_in_regions[@]} -gt 0 ]]; then
+            error "Parameter $parameter_name already exists in regions: ${exists_in_regions[*]}. Use --force to overwrite."
+        fi
+    fi
+
+    if [[ "$dryrun" == true ]]; then
+        log "=== DRY RUN MODE ==="
+        log "Account ID: $current_account_id"
+        log "Parameter: $parameter_name"
+        log "Value: [HIDDEN]"
+        log "Type: SecureString"
+        log "Author: $author"
+        log "Regions to process: ${regions_to_process[*]}"
+        log "Force deletion: $force"
+        log "=== EXECUTION PLAN ==="
+    fi
+
+    for region in "${regions_to_process[@]}"; do
+        if check_parameter_exists "$region" "$parameter_name"; then
+            if [[ "$force" == true ]]; then
+                delete_parameter "$region" "$parameter_name" "$dryrun"
+            else
+                if [[ "$dryrun" == false ]]; then
+                    error "Parameter $parameter_name already exists in region $region. Use --force to overwrite."
+                else
+                    log "[DRYRUN] Parameter $parameter_name already exists in region $region. Would fail without --force"
+                fi
+            fi
+        fi
+
+        create_parameter "$region" "$parameter_name" "$parameter_value" "$author" "$dryrun"
+    done
+
+    if [[ "$dryrun" == true ]]; then
+        log "=== DRY RUN COMPLETE ==="
+    else
+        log "Successfully processed parameter $parameter_name in ${#regions_to_process[@]} region(s)"
+    fi
+}
+
+main "$@"
