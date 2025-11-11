@@ -33,6 +33,8 @@
     export PRETTIERD_DEFAULT_CONFIG="$HOME/.config/.prettierrc.json"
     export XMLFORMAT_CONF="$HOME/.config/.xmlformat.conf"
     export ATMOS_COMPONENTS_TERRAFORM_COMMAND="tofu"
+    export PAGER=""
+    export AWS_PAGER=""
 
     export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
     export GEMINI_API_KEY="$(cat ${config.sops.secrets.gemini_api_key.path})"
