@@ -1,5 +1,8 @@
 { ... }:
 {
   homebrew.enable = true;
-  homebrew.casks = [ "1password" ];
+  homebrew.casks = [
+    "1password"
+    "linear-linear"
+  ];
 }

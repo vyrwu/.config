@@ -63,6 +63,7 @@ automatically-unhide-macos-hidden-apps = true
   alt-cmd-t = 'exec-and-forget open -na "WezTerm"' # Terminal
   alt-cmd-c = 'exec-and-forget open -na "Slack"' # Chat
   alt-cmd-d = 'exec-and-forget open -a "Notion"' # Docs
+  alt-cmd-i = 'exec-and-forget open -a "Linear"' # Issues
 
   alt-f = 'fullscreen'
 
