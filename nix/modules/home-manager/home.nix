@@ -7,6 +7,7 @@ let
       pkgs.slack
       pkgs.firefox
       pkgs.notion-app
+      pkgs.maccy
     ];
 
     cli = [
