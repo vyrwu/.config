@@ -71,7 +71,7 @@ let
       pkgs.kubectl
       pkgs.istioctl
       pkgs.k9s
-      pkgs.kubernetes-helm
+      (pkgs.wrapHelm pkgs.kubernetes-helm { plugins = [ pkgs.kubernetes-helmPlugins.helm-diff ]; })
       pkgs.helm-ls
       pkgs.helmfile
       pkgs.kustomize
