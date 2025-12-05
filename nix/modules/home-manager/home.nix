@@ -34,6 +34,7 @@ let
       pkgs.fzf
       pkgs.bat
       pkgs.lla
+      pkgs.yazi
     ];
 
     ai = [
