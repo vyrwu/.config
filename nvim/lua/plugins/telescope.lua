@@ -82,7 +82,7 @@ return {
         },
         file_browser = {
           hidden = true,
-          hijack_netrw = true,
+          hijack_netrw = false,
         },
       },
     })
