@@ -32,3 +32,4 @@ AWS_DEFAULT_SSO_START_URL=<AWS_SSO_START_URL> aws-sso-util configure populate --
 - Set default browser to Firefox
 - Git signing setup
 - (Maybe) SSH setup with YubiKey
+- Port Nix Config to WSL (Windows)
