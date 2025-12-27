@@ -72,21 +72,25 @@
   programs.git = {
     enable = true;
 
-    aliases = {
-      co = "checkout";
-      st = "status";
-    };
+    settings = {
 
-    userEmail = "dev.anowak@gmail.com";
-    userName = "vyrwu";
+      alias = {
+        co = "checkout";
+        st = "status";
+      };
 
-    extraConfig = {
+      user = {
+        email = "dev.anowak@gmail.com";
+        name = "vyrwu";
+      };
+
       url = {
         "ssh://git@github.com/" = {
           insteadOf = "https://github.com/";
         };
       };
     };
+
   };
 
   programs.zsh.oh-my-zsh.enable = true;

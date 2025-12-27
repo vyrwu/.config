@@ -3,7 +3,9 @@ let
   packages = {
     desktop = [
       pkgs.aerospace
-      pkgs.gimp
+      # TODO: Revert to Gimp3 once the below is fixed:
+      # https://github.com/NixOS/nixpkgs/issues/411189
+      pkgs.gimp2
       pkgs.slack
       pkgs.firefox
       pkgs.notion-app
