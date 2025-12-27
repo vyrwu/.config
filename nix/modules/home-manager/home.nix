@@ -8,6 +8,7 @@ let
       pkgs.firefox
       pkgs.notion-app
       pkgs.maccy
+      pkgs.utm
     ];
 
     cli = [

@@ -51,10 +51,12 @@ automatically-unhide-macos-hidden-apps = true
   alt-1 = 'workspace 1' # Chat
   alt-2 = 'workspace 2' # Browser
   alt-3 = 'workspace 3' # Terminal
+  alt-4 = 'workspace 4' # Emulator
 
   alt-shift-1 = 'move-node-to-workspace 1'
   alt-shift-2 = 'move-node-to-workspace 2'
   alt-shift-3 = 'move-node-to-workspace 3'
+  alt-shift-4 = 'move-node-to-workspace 4'
 
   alt-tab = 'workspace-back-and-forth'
   alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
